@@ -11,6 +11,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = heaterClient
 TEMPLATE = app
 
+LIBS += $${PWD}/libmodbus-5.dll
+
+DEFINES += QMODBUS_LIBRARY
 
 SOURCES += main.cpp \
     cheatermainform.cpp \
@@ -18,7 +21,11 @@ SOURCES += main.cpp \
     cheaterclient.cpp \
     cheaterparametersettings.cpp \
     cheaterfaultinfo.cpp \
-    cheaterhistoryrecord.cpp
+    cheaterhistoryrecord.cpp \
+    qmodbusbits.cpp \
+    qmodbuserror.cpp \
+    qmodbusmaster.cpp \
+    qmodbusregisters.cpp
 
 HEADERS  += \
     cheatermainform.h \
@@ -26,7 +33,14 @@ HEADERS  += \
     cheaterclient.h \
     cheaterparametersettings.h \
     cheaterfaultinfo.h \
-    cheaterhistoryrecord.h
+    cheaterhistoryrecord.h \
+    qmodbus.h \
+    qmodbusbits.h \
+    qmodbuserror.h \
+    qmodbusmaster.h \
+    qmodbusregisters.h \
+    modbus.h \
+    config.h
 
 FORMS += \
     cheatermainform.ui \
@@ -35,3 +49,7 @@ FORMS += \
     cheaterparametersettings.ui \
     cheaterfaultinfo.ui \
     cheaterhistoryrecord.ui
+
+CONFIG += warn_off
+
+RC_FILE = logo.rc

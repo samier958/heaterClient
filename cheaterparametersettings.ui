@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -41,7 +41,7 @@
      <property name="title">
       <string>加热功能</string>
      </property>
-     <widget class="QCheckBox" name="checkBox">
+     <widget class="QCheckBox" name="autoHeating">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -74,7 +74,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="autoHeatingStartTemp"/>
          </item>
         </layout>
        </item>
@@ -88,7 +88,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2"/>
+          <widget class="QLineEdit" name="autoHeatingStopTemp"/>
          </item>
         </layout>
        </item>
@@ -107,7 +107,7 @@
      <property name="title">
       <string>散热功能</string>
      </property>
-     <widget class="QCheckBox" name="checkBox_2">
+     <widget class="QCheckBox" name="autoRadiating">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -140,7 +140,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QLineEdit" name="autoRadiatingStartTemp"/>
          </item>
         </layout>
        </item>
@@ -154,7 +154,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_4"/>
+          <widget class="QLineEdit" name="autoRadiatingStopTemp"/>
          </item>
         </layout>
        </item>
@@ -183,12 +183,12 @@
           <item>
            <widget class="QLabel" name="label_5">
             <property name="text">
-             <string>TextLabel</string>
+             <string>手动/模拟调式自动退出时间:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_5"/>
+           <widget class="QLineEdit" name="debugTerminateTimer"/>
           </item>
          </layout>
         </item>
@@ -197,12 +197,12 @@
           <item>
            <widget class="QLabel" name="label_6">
             <property name="text">
-             <string>TextLabel</string>
+             <string>加热启动PTC投入滞后时间:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_6"/>
+           <widget class="QLineEdit" name="PTCDelayStart"/>
           </item>
          </layout>
         </item>
@@ -211,12 +211,12 @@
           <item>
            <widget class="QLabel" name="label_7">
             <property name="text">
-             <string>TextLabel</string>
+             <string>加热停止FAN关闭滞后时间:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_7"/>
+           <widget class="QLineEdit" name="FANDelayStop"/>
           </item>
          </layout>
         </item>
@@ -227,9 +227,9 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="startInterval">
             <property name="text">
-             <string>TextLabel</string>
+             <string>启动间隔时间:</string>
             </property>
            </widget>
           </item>
@@ -241,9 +241,9 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_9">
           <item>
-           <widget class="QLabel" name="label_9">
+           <widget class="QLabel" name="minimumDowntime">
             <property name="text">
-             <string>TextLabel</string>
+             <string>最短停机时间:</string>
             </property>
            </widget>
           </item>
@@ -255,9 +255,9 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_10">
           <item>
-           <widget class="QLabel" name="label_10">
+           <widget class="QLabel" name="PT100TempSensorOffset">
             <property name="text">
-             <string>TextLabel</string>
+             <string>PT100温度传感器修正值:</string>
             </property>
            </widget>
           </item>
@@ -272,7 +272,7 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="apply">
    <property name="geometry">
     <rect>
      <x>300</x>
@@ -285,7 +285,7 @@
     <string>应用</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="cancle">
    <property name="geometry">
     <rect>
      <x>410</x>
