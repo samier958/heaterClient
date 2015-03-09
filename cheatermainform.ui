@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="connect">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -26,7 +26,7 @@
     <string>联机</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="disconnect">
    <property name="geometry">
     <rect>
      <x>340</x>
@@ -44,8 +44,8 @@
     <rect>
      <x>150</x>
      <y>80</y>
-     <width>54</width>
-     <height>12</height>
+     <width>281</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">

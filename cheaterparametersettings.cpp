@@ -12,3 +12,17 @@ CHeaterParameterSettings::~CHeaterParameterSettings()
 {
     delete ui;
 }
+
+
+void CHeaterParameterSettings::showHeaterParameterSettings()
+{
+
+}
+void CHeaterParameterSettings::updateHeaterParameterSettings()
+{
+
+}
+void CHeaterParameterSettings::reflashHeaterControlForm(int index)
+{
+
+}

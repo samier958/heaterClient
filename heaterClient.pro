@@ -40,7 +40,8 @@ HEADERS  += \
     qmodbusmaster.h \
     qmodbusregisters.h \
     modbus.h \
-    config.h
+    config.h \
+    heatermodbusoffsetaddress.h
 
 FORMS += \
     cheatermainform.ui \

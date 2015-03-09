@@ -17,13 +17,13 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>40</y>
+     <y>50</y>
      <width>461</width>
-     <height>301</height>
+     <height>291</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -161,6 +161,67 @@
       </layout>
      </widget>
     </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>10</y>
+       <width>231</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_12">
+      <item>
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>加热器选择：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox">
+        <item>
+         <property name="text">
+          <string>#1加热器</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>#2加热器</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>#3加热器</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>#4加热器</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>#5加热器</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
@@ -170,9 +231,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>10</y>
+       <y>60</y>
        <width>402</width>
-       <height>231</height>
+       <height>181</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -227,46 +288,107 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
-           <widget class="QLabel" name="startInterval">
+           <widget class="QLabel" name="label_8">
             <property name="text">
              <string>启动间隔时间:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_8"/>
+           <widget class="QLineEdit" name="startInterval"/>
           </item>
          </layout>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_9">
           <item>
-           <widget class="QLabel" name="minimumDowntime">
+           <widget class="QLabel" name="label_9">
             <property name="text">
              <string>最短停机时间:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_9"/>
+           <widget class="QLineEdit" name="minimumDowntime"/>
           </item>
          </layout>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_10">
           <item>
-           <widget class="QLabel" name="PT100TempSensorOffset">
+           <widget class="QLabel" name="PT100TempSensorOffset_10">
             <property name="text">
              <string>PT100温度传感器修正值:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_10"/>
+           <widget class="QLineEdit" name="PT100TempSensorOffset"/>
           </item>
          </layout>
         </item>
        </layout>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>20</y>
+       <width>231</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_13">
+      <item>
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_2">
+        <item>
+         <property name="text">
+          <string>#1加热器</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>#2加热器</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>#3加热器</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>#4加热器</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>#5加热器</string>
+         </property>
+        </item>
+       </widget>
       </item>
      </layout>
     </widget>
