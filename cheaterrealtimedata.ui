@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -253,116 +253,197 @@
     <attribute name="title">
      <string>输入端口状态</string>
     </attribute>
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>561</width>
-       <height>411</height>
+       <x>60</x>
+       <y>40</y>
+       <width>231</width>
+       <height>241</height>
       </rect>
      </property>
-     <row>
-      <property name="text">
-       <string>新建行</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>风机过载</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>风机过载</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>风机过载</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>风机过载</string>
-      </property>
-     </row>
-     <column>
-      <property name="text">
-       <string>#1加热器</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>#1加热器</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>#1加热器</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>#1加热器</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>#1加热器</string>
-      </property>
-     </column>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox_2"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_10">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_10">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox_3"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_11">
+        <item>
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox_4"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <item>
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_12">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox_5"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>330</y>
+       <width>204</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_13">
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_13">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_3">
     <attribute name="title">
      <string>输出端口状态</string>
     </attribute>
-    <widget class="QTableWidget" name="tableWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>531</width>
-       <height>361</height>
-      </rect>
-     </property>
-     <row>
-      <property name="text">
-       <string>#1加热器</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>#2加热器</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>#3加热器</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>#4加热器</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>#5加热器</string>
-      </property>
-     </row>
-     <column>
-      <property name="text">
-       <string>风机过载</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>PTC过载</string>
-      </property>
-     </column>
-    </widget>
    </widget>
   </widget>
  </widget>

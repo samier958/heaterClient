@@ -20,33 +20,50 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QWidget *pSession;
+    //pModbusMaster = new QModbusMaster("127.0.0.1", MODBUS_TCP_PORT);
+    pModbusMaster = new QModbusMaster("192.168.1.111", MODBUS_TCP_PORT);
+    pModbusMaster->setSlave(MODBUS_SLAVE_ADDR);
+
+
+    CHeaterMainForm *pHeaterMainForm;
     pStackedWidget = ui->sessionStackContainer;
-    pSession = new CHeaterMainForm(this);
-    pStackedWidget->insertWidget(MainForm, pSession);
+    pHeaterMainForm = new CHeaterMainForm(this);
+    pStackedWidget->insertWidget(MainForm, pHeaterMainForm);
+    pHeaterMainForm->setModbusMaster(pModbusMaster);
 
-    connect(pSession, SIGNAL(establishNetworkConnection()), this, SLOT(establishNetworkConnectionHub()));
-    connect(pSession, SIGNAL(disconnectNetwork()), this, SLOT(disconnectNetworkHub()));
+    connect(pHeaterMainForm, SIGNAL(establishNetworkConnection()), this, SLOT(establishNetworkConnectionHub()));
+    connect(pHeaterMainForm, SIGNAL(disconnectNetwork()), this, SLOT(disconnectNetworkHub()));
+    connect(this, SIGNAL(updateControlForm(int)), pHeaterMainForm, SLOT(reflashHeaterControlForm(int)));
 
-    pSession = new CHeaterRealTimeData(this);
-    pStackedWidget->insertWidget(RealTimeData, pSession);
+    CHeaterRealTimeData *pHeaterRealTimeData;
+    pHeaterRealTimeData = new CHeaterRealTimeData(this);
+    pStackedWidget->insertWidget(RealTimeData, pHeaterRealTimeData);
+    pHeaterRealTimeData->setModbusMaster(pModbusMaster);
+    connect(this, SIGNAL(updateControlForm(int)), pHeaterRealTimeData, SLOT(reflashHeaterControlForm(int)));
 
-    pSession = new CHeaterParameterSettings(this);
-    pStackedWidget->insertWidget(ParameterSetting, pSession);
+    CHeaterParameterSettings *pHeaterParameterSettings;
+    pHeaterParameterSettings = new CHeaterParameterSettings(this);
+    pStackedWidget->insertWidget(ParameterSetting, pHeaterParameterSettings);
+    pHeaterParameterSettings->setModbusMaster(pModbusMaster);
+    connect(this, SIGNAL(updateControlForm(int)), pHeaterParameterSettings, SLOT(reflashHeaterControlForm(int)));
 
-    pSession = new CHeaterFaultInfo(this);
-    pStackedWidget->insertWidget(FaultInfo, pSession);
+    CHeaterFaultInfo *pHeaterFaultInfo;
+    pHeaterFaultInfo = new CHeaterFaultInfo(this);
+    pStackedWidget->insertWidget(FaultInfo, pHeaterFaultInfo);
+    pHeaterFaultInfo->setModbusMaster(pModbusMaster);
+    connect(this, SIGNAL(updateControlForm(int)), pHeaterFaultInfo, SLOT(reflashHeaterControlForm(int)));
 
-    pSession = new CHeaterHistoryRecord(this);
-    pStackedWidget->insertWidget(HistoryRecord, pSession);
+    CHeaterHistoryRecord *pHeaterHistoryRecord;
+    pHeaterHistoryRecord = new CHeaterHistoryRecord(this);
+    pStackedWidget->insertWidget(HistoryRecord, pHeaterHistoryRecord);
+    connect(this, SIGNAL(updateControlForm(int)), pHeaterHistoryRecord, SLOT(reflashHeaterControlForm(int)));
 
 
     pStackedWidget->setCurrentIndex(MainForm);
+    emit updateControlForm(MainForm);
     connect(ui->functionSwitchButtonGroup, SIGNAL(buttonReleased(int)), this, SLOT(functionSwitchButtonGroupStatusChanged(int)));
 
 
-    pModbusMaster = new QModbusMaster("127.0.0.1", MODBUS_TCP_PORT);
-    pModbusMaster->setSlave(MODBUS_SLAVE_ADDR);
 
 
     m_networkStatus = false;
@@ -55,7 +72,7 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
 
     pTimer = new QTimer;
     pTimer->start(1000);
-    connect(pTimer, SIGNAL(timeout()), this, SLOT(showHeaterUnitCurrentStatus()));
+    connect(pTimer, SIGNAL(timeout()), this, SLOT(updateHeaterUnitCurrentStatus()));
 
 }
 
@@ -65,8 +82,9 @@ CHeaterClient::~CHeaterClient()
 }
 void CHeaterClient::functionSwitchButtonGroupStatusChanged(int id)
 {
-    qDebug()<<id;
+    qDebug()<<-(id + MainForm);
     pStackedWidget->setCurrentIndex(-(id + MainForm));
+    emit updateControlForm(-(id + MainForm));
 }
 
 void CHeaterClient::showHeaterUnitCurrentStatus()
@@ -86,24 +104,27 @@ void CHeaterClient::updateHeaterUnitCurrentStatus()
 {
     QModbusRegisters averageTemperatureRegister(HEATER_UNIT_AVERAGE_TEMP_ADDR, 1);
     QModbusError modbusErr;
+
+    /*
     pModbusMaster->connect();
     modbusErr = pModbusMaster->lastError();
     if(modbusErr.isValid()) {m_networkStatus = false; return ;}
     pModbusMaster->readInputRegisters(averageTemperatureRegister);
     pModbusMaster->close();
     m_averageTemperature = averageTemperatureRegister.getInteger16(0);
-
+    pModbusMaster->connect();
     QModbusRegisters faultStatusRegister(HEATER_FAULT_STATUS_ADDR, 1);
     for(int i = 0; i < 5; i ++){
         faultStatusRegister.setAddress(HEATER_FAULT_STATUS_ADDR + MODBUS_OFFSET_ADDR * i);
-        pModbusMaster->connect();
         modbusErr = pModbusMaster->lastError();
         if(modbusErr.isValid()) {m_networkStatus = false; return ;}
         pModbusMaster->readInputRegisters(faultStatusRegister);
-        pModbusMaster->close();
         if(faultStatusRegister.getUInteger16(0)){m_faultStatus = true;break;}
         else {m_faultStatus = false;}
     }
+    pModbusMaster->close();
+    */
+    showHeaterUnitCurrentStatus();
 }
 
 

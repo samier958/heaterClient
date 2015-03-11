@@ -3,6 +3,10 @@
 
 #include <QWidget>
 
+#include "qmodbusmaster.h"
+
+using namespace Modbus;
+
 namespace Ui {
 class CHeaterParameterSettings;
 }
@@ -15,6 +19,8 @@ public:
     explicit CHeaterParameterSettings(QWidget *parent = 0);
     ~CHeaterParameterSettings();
 
+    void setModbusMaster(QModbusMaster *modbusMaster);
+
 public slots:
     void reflashHeaterControlForm(int index);
 
@@ -22,9 +28,19 @@ private slots:
     void showHeaterParameterSettings();
     void updateHeaterParameterSettings();
     
+    void on_heaterSwitch_currentIndexChanged(int index);
+
+    void on_apply_released();
+
+    void on_cancle_pressed();
+
 private:
     Ui::CHeaterParameterSettings *ui;
 
+
+    QModbusMaster *pModbusMaster;
+
+    int m_heaterIndex;
 
     bool enbaleAutoHeating;
     int m_autoHeatingStartTemp;

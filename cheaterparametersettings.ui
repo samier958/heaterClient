@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>556</width>
-    <height>436</height>
+    <width>561</width>
+    <height>489</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>50</y>
+     <x>40</x>
+     <y>80</y>
      <width>461</width>
-     <height>291</height>
+     <height>301</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -161,67 +161,6 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>10</y>
-       <width>231</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_12">
-      <item>
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>加热器选择：</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboBox">
-        <item>
-         <property name="text">
-          <string>#1加热器</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>#2加热器</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>#3加热器</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>#4加热器</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>#5加热器</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-     </layout>
-    </widget>
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
@@ -231,9 +170,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>60</y>
+       <y>20</y>
        <width>402</width>
-       <height>181</height>
+       <height>221</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -331,74 +270,13 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="layoutWidget_3">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>20</y>
-       <width>231</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_13">
-      <item>
-       <widget class="QLabel" name="label_11">
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboBox_2">
-        <item>
-         <property name="text">
-          <string>#1加热器</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>#2加热器</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>#3加热器</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>#4加热器</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>#5加热器</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-     </layout>
-    </widget>
    </widget>
   </widget>
   <widget class="QPushButton" name="apply">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>370</y>
+     <x>320</x>
+     <y>430</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -410,8 +288,8 @@
   <widget class="QPushButton" name="cancle">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>370</y>
+     <x>430</x>
+     <y>430</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -419,6 +297,67 @@
    <property name="text">
     <string>取消</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>20</y>
+     <width>321</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_12">
+    <item>
+     <widget class="QLabel" name="label_10">
+      <property name="text">
+       <string>加热器选择：</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QComboBox" name="heaterSwitch">
+      <item>
+       <property name="text">
+        <string>#1加热器</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#2加热器</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#3加热器</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#4加热器</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>#5加热器</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

@@ -12,14 +12,24 @@ namespace Ui {
 class CHeaterMainForm;
 }
 
+class QTimer;
+
 class CHeaterMainForm : public QWidget
 {
     Q_OBJECT
     
 public:
+    QString systemTimeString[5] = {
+        tr("年"),
+        tr("月"),
+        tr("日   "),
+        tr(":"),
+        tr(" ")
+    };
     explicit CHeaterMainForm(QWidget *parent = 0);
     ~CHeaterMainForm();
 
+    void setModbusMaster(QModbusMaster *modbusMaster);
 signals:
     void establishNetworkConnection();
     void disconnectNetwork();
@@ -35,6 +45,7 @@ private:
     Ui::CHeaterMainForm *ui;
 
 
+    QTimer *pTimer;
     QModbusMaster *pModbusMaster;
 
     int m_time[5];

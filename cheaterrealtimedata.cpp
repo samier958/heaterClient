@@ -3,12 +3,19 @@
 
 
 #include "heatermodbusoffsetaddress.h"
+#include "cheaterclient.h"
+
+#include <QTimer>
 
 CHeaterRealTimeData::CHeaterRealTimeData(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CHeaterRealTimeData)
 {
     ui->setupUi(this);
+
+    pTimer = new QTimer;
+    pTimer->setInterval(1000);
+    connect(pTimer, SIGNAL(timeout()), this, SLOT(updateHeaterRealTimeData()));
 }
 
 CHeaterRealTimeData::~CHeaterRealTimeData()
@@ -16,6 +23,10 @@ CHeaterRealTimeData::~CHeaterRealTimeData()
     delete ui;
 }
 
+void CHeaterRealTimeData::setModbusMaster(QModbusMaster *modbusMaster)
+{
+    pModbusMaster = modbusMaster;
+}
 
 void CHeaterRealTimeData::showHeaterRealTimeData()
 {
@@ -42,8 +53,10 @@ void CHeaterRealTimeData::updateHeaterRealTimeData()
     pModbusMaster->close();
     for(int i = 0; i < 5; i ++){m_temperatureSensor[i] = temperatureSensorsRegisters.getInteger16(i);}
     m_temperatureSensorBackup = temperatureSensorsRegisters.getInteger16(HEATER_TEMPERATURE_SENSOR_LENGTH - 1);
+    showHeaterRealTimeData();
 }
 void CHeaterRealTimeData::reflashHeaterControlForm(int index)
 {
-
+    if(CHeaterClient::RealTimeData == index){pTimer->start();}
+    else{pTimer->stop();}
 }

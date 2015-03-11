@@ -26,7 +26,7 @@
     <string>当前加热器故障信息</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>31</x>
@@ -91,35 +91,35 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLabel" name="label_6">
+       <widget class="QLabel" name="faultInfo_1">
         <property name="text">
          <string>TextLabel</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_7">
+       <widget class="QLabel" name="faultInfo_2">
         <property name="text">
          <string>TextLabel</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_8">
+       <widget class="QLabel" name="faultInfo_3">
         <property name="text">
          <string>TextLabel</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="faultInfo_4">
         <property name="text">
          <string>TextLabel</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_10">
+       <widget class="QLabel" name="faultInfo_5">
         <property name="text">
          <string>TextLabel</string>
         </property>
@@ -142,30 +142,7 @@
     </item>
    </layout>
   </widget>
-  <zorder>label</zorder>
-  <zorder>horizontalSpacer</zorder>
-  <zorder>comboBox</zorder>
-  <zorder>label_2</zorder>
-  <zorder>label_3</zorder>
-  <zorder>verticalSpacer</zorder>
   <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget_2</zorder>
-  <zorder>layoutWidget_3</zorder>
-  <zorder>layoutWidget_4</zorder>
-  <zorder>verticalSpacer_4</zorder>
-  <zorder>layoutWidget_5</zorder>
-  <zorder>label</zorder>
-  <zorder>label_2</zorder>
-  <zorder>label_3</zorder>
-  <zorder>label_4</zorder>
-  <zorder>label_5</zorder>
-  <zorder>label_6</zorder>
-  <zorder>label_7</zorder>
-  <zorder>label_8</zorder>
-  <zorder>label_9</zorder>
-  <zorder>label_10</zorder>
-  <zorder>horizontalSpacer</zorder>
-  <zorder>horizontalSpacer_2</zorder>
   <zorder>label_11</zorder>
  </widget>
  <resources/>

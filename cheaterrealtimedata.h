@@ -11,6 +11,8 @@ namespace Ui {
 class CHeaterRealTimeData;
 }
 
+class QTimer;
+
 class CHeaterRealTimeData : public QWidget
 {
     Q_OBJECT
@@ -18,6 +20,8 @@ class CHeaterRealTimeData : public QWidget
 public:
     explicit CHeaterRealTimeData(QWidget *parent = 0);
     ~CHeaterRealTimeData();
+
+    void setModbusMaster(QModbusMaster *modbusMaster);
 
 public slots:
     void reflashHeaterControlForm(int index);
@@ -27,6 +31,7 @@ private slots:
 private:
     Ui::CHeaterRealTimeData *ui;
 
+    QTimer *pTimer;
     QModbusMaster *pModbusMaster;
     int m_temperatureSensor[5];
     int m_temperatureSensorBackup;

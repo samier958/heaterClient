@@ -44,13 +44,15 @@ public:
     explicit CHeaterClient(QWidget *parent = 0);
     ~CHeaterClient();
 
-    void updateHeaterUnitCurrentStatus();
 
+signals:
+    void updateControlForm(int);
 private slots:
     void functionSwitchButtonGroupStatusChanged(int id);
     void establishNetworkConnectionHub();
     void disconnectNetworkHub();
     void showHeaterUnitCurrentStatus();
+    void updateHeaterUnitCurrentStatus();
     
 private:
     Ui::CHeaterClient *ui;
