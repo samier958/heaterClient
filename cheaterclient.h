@@ -8,6 +8,11 @@
 #define MODBUS_TCP_PORT 502
 #define MODBUS_SLAVE_ADDR 6
 
+#define FAN_TOWER_GROUP 2
+
+#define NETWORK_ONLINE true
+#define NETWORK_OFFLINE false
+
 using namespace Modbus;
 
 namespace Ui {
@@ -17,6 +22,8 @@ class CHeaterClient;
 
 
 class QStackedWidget;
+class QTcpSocket;
+
 
 class CHeaterClient : public QWidget
 {
@@ -41,6 +48,14 @@ public:
         tr("故障"),
         tr("其它")
     };
+
+    typedef struct _heater_info_preview{
+        QTcpSocket *pTcpSocket;
+        bool networkStatus;
+        int averageTemperature;
+        bool faultStatus;
+        QModbusMaster *pModbusMaster;
+    }SHeaterInfoPreview;
     explicit CHeaterClient(QWidget *parent = 0);
     ~CHeaterClient();
 
@@ -49,8 +64,6 @@ signals:
     void updateControlForm(int);
 private slots:
     void functionSwitchButtonGroupStatusChanged(int id);
-    void establishNetworkConnectionHub();
-    void disconnectNetworkHub();
     void showHeaterUnitCurrentStatus();
     void updateHeaterUnitCurrentStatus();
     
@@ -62,11 +75,7 @@ private:
 
     QTimer *pTimer;
 
-    bool m_networkStatus;
-    int m_averageTemperature;
-    bool m_faultStatus;
-
-    QModbusMaster *pModbusMaster;
+    SHeaterInfoPreview heaterInfoPreview[FAN_TOWER_GROUP];
 };
 
 #endif // CHEATERCLIENT_H

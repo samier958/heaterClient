@@ -41,92 +41,172 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>140</y>
-     <width>151</width>
+     <width>161</width>
      <height>371</height>
     </rect>
    </property>
    <property name="title">
     <string>当前状态</string>
    </property>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>平均温度：</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>54</width>
-      <height>12</height>
+      <width>141</width>
+      <height>141</height>
      </rect>
     </property>
-    <property name="text">
-     <string>网络链接：</string>
+    <property name="title">
+     <string>机舱</string>
     </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>124</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>网络链接：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="networkStatus_0">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>平均温度：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="averageTemperature_0">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>故障状态：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="faultStatus_0">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>90</y>
-      <width>54</width>
-      <height>12</height>
+      <y>210</y>
+      <width>141</width>
+      <height>131</height>
      </rect>
     </property>
-    <property name="text">
-     <string>故障状态：</string>
+    <property name="title">
+     <string>机舱</string>
     </property>
-   </widget>
-   <widget class="QLabel" name="networkStatus">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>30</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="averageTemperature">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>60</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="faultStatus">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>90</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
+    <widget class="QWidget" name="layoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>124</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>网络链接：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="networkStatus_1">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>平均温度：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="averageTemperature_1">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>故障状态：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="faultStatus_1">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
   <widget class="QToolButton" name="toolButton">
