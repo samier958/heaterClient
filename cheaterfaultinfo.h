@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "qmodbusmaster.h"
+#include "heaterConfig.h"
 
 using namespace Modbus;
 
@@ -27,11 +28,14 @@ public:
         tr("无故障"),
         tr("未知")
     };
+    typedef struct _heater_fault_info{
+        int faultInfo[5];
+    }SHeaterFaultInfo;
+
     explicit CHeaterFaultInfo(QWidget *parent = 0);
     ~CHeaterFaultInfo();
     void showHeaterFaultInfo();
     void updateHeaterFaultInfo();
-    void setModbusMaster(QModbusMaster *modbusMaster);
 
 public slots:
     void reflashHeaterControlForm(int index);
@@ -40,8 +44,7 @@ private:
     Ui::CHeaterFaultInfo *ui;
 
     QLabel *pFaultInfoLabel[5];
-    int m_faultInfo[5];
-    QModbusMaster *pModbusMaster;
+    SHeaterFaultInfo heaterFaultInfo[FAN_TOWER_GROUP];
 };
 
 #endif // CHEATERFAULTINFO_H

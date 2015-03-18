@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     qmodbusbits.cpp \
     qmodbuserror.cpp \
     qmodbusmaster.cpp \
-    qmodbusregisters.cpp
+    qmodbusregisters.cpp \
+    cheaterclientserver.cpp
 
 HEADERS  += \
     cheatermainform.h \
@@ -41,7 +42,8 @@ HEADERS  += \
     qmodbusregisters.h \
     modbus.h \
     config.h \
-    heatermodbusoffsetaddress.h
+    heaterConfig.h \
+    cheaterclientserver.h
 
 FORMS += \
     cheatermainform.ui \

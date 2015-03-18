@@ -1,7 +1,7 @@
 #include "cheaterparametersettings.h"
 #include "ui_cheaterparametersettings.h"
 
-#include "heatermodbusoffsetaddress.h"
+#include "heaterConfig.h"
 #include "cheaterclient.h"
 
 #include <QDebug>
@@ -12,7 +12,7 @@ CHeaterParameterSettings::CHeaterParameterSettings(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    m_heaterIndex = 0;
+    //heaterIndex = 0;
 }
 
 CHeaterParameterSettings::~CHeaterParameterSettings()
@@ -20,14 +20,9 @@ CHeaterParameterSettings::~CHeaterParameterSettings()
     delete ui;
 }
 
-void CHeaterParameterSettings::setModbusMaster(QModbusMaster *modbusMaster)
-{
-    pModbusMaster = modbusMaster;
-}
-
-
 void CHeaterParameterSettings::showHeaterParameterSettings()
 {
+    /*
     QString tempString;
     ui->autoHeating->setChecked(enbaleAutoHeating);
     tempString = QString::number(((double)(m_autoHeatingStartTemp)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
@@ -55,32 +50,10 @@ void CHeaterParameterSettings::showHeaterParameterSettings()
     ui->minimumDowntime->setText(tempString);
     tempString = QString::number(((double)(m_PT100TempSensorOffset)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
     ui->PT100TempSensorOffset->setText(tempString);
-
+    */
 }
 void CHeaterParameterSettings::updateHeaterParameterSettings()
 {
-    QModbusRegisters parameterSettingsRegisters(HEATER_PARAMETER_SETTINGS_BASE + MODBUS_OFFSET_ADDR * m_heaterIndex, HEATER_PARAMETER_SETTINGS_LENGTH);
-    pModbusMaster->connect();
-    pModbusMaster->readInputRegisters(parameterSettingsRegisters);
-    pModbusMaster->close();
-
-    enbaleAutoHeating = parameterSettingsRegisters.getUInteger16(0) & (0x0001);
-    m_autoHeatingStartTemp = parameterSettingsRegisters.getInteger16(1);
-    m_autoHeatingStopTemp = parameterSettingsRegisters.getInteger16(2);
-
-    enbaleAutoRadiating = parameterSettingsRegisters.getUInteger16(0) & (0x0002);
-    m_autoRadiatingStartTemp = parameterSettingsRegisters.getInteger16(3);
-    m_autoRadiatingStopTemp = parameterSettingsRegisters.getInteger16(4);
-
-    m_debugTerminateTimer = parameterSettingsRegisters.getInteger16(10);
-    m_PTCDelayStart = parameterSettingsRegisters.getInteger16(11);
-    m_FANDelayStop = parameterSettingsRegisters.getInteger16(12);
-    m_startInterval = parameterSettingsRegisters.getInteger16(13);
-    m_minimumDowntime = parameterSettingsRegisters.getInteger16(14);
-
-    m_PT100TempSensorOffset = parameterSettingsRegisters.getInteger16(19);
-
-    showHeaterParameterSettings();
 
 }
 void CHeaterParameterSettings::reflashHeaterControlForm(int index)
@@ -90,12 +63,13 @@ void CHeaterParameterSettings::reflashHeaterControlForm(int index)
 
 void CHeaterParameterSettings::on_heaterSwitch_currentIndexChanged(int index)
 {
-    m_heaterIndex = index;
+    //heaterIndex = index;
     updateHeaterParameterSettings();
 }
 
 void CHeaterParameterSettings::on_apply_released()
 {
+    /*
     QModbusRegisters parameterSettingsRegisters(HEATER_PARAMETER_SETTINGS_BASE + MODBUS_OFFSET_ADDR * m_heaterIndex, HEATER_PARAMETER_SETTINGS_LENGTH);
     pModbusMaster->connect();
     pModbusMaster->readInputRegisters(parameterSettingsRegisters);
@@ -167,11 +141,11 @@ void CHeaterParameterSettings::on_apply_released()
     pModbusMaster->connect();
     pModbusMaster->writeRegisters(parameterSettingsRegisters);
     pModbusMaster->close();
-
+    */
 
 }
 
 void CHeaterParameterSettings::on_cancle_pressed()
 {
-    showHeaterParameterSettings();
+    //showHeaterParameterSettings();
 }

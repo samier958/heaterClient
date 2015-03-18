@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "qmodbusmaster.h"
+#include "heaterConfig.h"
 
 
 #define HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_NUM 20
@@ -24,9 +25,6 @@ class CHeaterHistoryRecord : public QWidget
 public:
     explicit CHeaterHistoryRecord(QWidget *parent = 0);
     ~CHeaterHistoryRecord();
-
-    void setModbusMaster(QModbusMaster *modbusMaster);
-
 
     void updateHeaterHistoryRecord();
     void showHeaterHistoryRecord();

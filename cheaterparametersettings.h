@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "qmodbusmaster.h"
+#include "heaterConfig.h"
 
 using namespace Modbus;
 
@@ -16,10 +17,28 @@ class CHeaterParameterSettings : public QWidget
     Q_OBJECT
     
 public:
+    typedef struct _heater_parameter_settings{
+        int heaterIndex;
+
+        bool enbaleAutoHeating;
+        int autoHeatingStartTemp;
+        int autoHeatingStopTemp;
+
+        bool enbaleAutoRadiating;
+        int autoRadiatingStartTemp;
+        int autoRadiatingStopTemp;
+
+        int debugTerminateTimer;
+        int PTCDelayStart;
+        int FANDelayStop;
+
+        int startInterval;
+        int minimumDowntime;
+        int PT100TempSensorOffset;
+    }SHeaterParameterSettings;
+
     explicit CHeaterParameterSettings(QWidget *parent = 0);
     ~CHeaterParameterSettings();
-
-    void setModbusMaster(QModbusMaster *modbusMaster);
 
 public slots:
     void reflashHeaterControlForm(int index);
@@ -40,23 +59,8 @@ private:
 
     QModbusMaster *pModbusMaster;
 
-    int m_heaterIndex;
+    SHeaterParameterSettings heaterParameterSetting[FAN_TOWER_GROUP];
 
-    bool enbaleAutoHeating;
-    int m_autoHeatingStartTemp;
-    int m_autoHeatingStopTemp;
-
-    bool enbaleAutoRadiating;
-    int m_autoRadiatingStartTemp;
-    int m_autoRadiatingStopTemp;
-
-    int m_debugTerminateTimer;
-    int m_PTCDelayStart;
-    int m_FANDelayStop;
-
-    int m_startInterval;
-    int m_minimumDowntime;
-    int m_PT100TempSensorOffset;
 };
 
 #endif // CHEATERPARAMETERSETTINGS_H

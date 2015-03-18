@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "qmodbusmaster.h"
+#include "heaterConfig.h"
 
 using namespace Modbus;
 
@@ -11,30 +12,29 @@ namespace Ui {
 class CHeaterRealTimeData;
 }
 
-class QTimer;
-
 class CHeaterRealTimeData : public QWidget
 {
     Q_OBJECT
     
 public:
+    typedef struct _heater_real_time_data{
+        int temperatureSensor[5];
+        int temperatureSensorBackup;
+    }SHeaterRealTimeData;
+
     explicit CHeaterRealTimeData(QWidget *parent = 0);
     ~CHeaterRealTimeData();
-
-    void setModbusMaster(QModbusMaster *modbusMaster);
 
 public slots:
     void reflashHeaterControlForm(int index);
 private slots:
     void showHeaterRealTimeData();
-    void updateHeaterRealTimeData();
+    void on_heaterGroupSwith_currentIndexChanged(int index);
+
 private:
     Ui::CHeaterRealTimeData *ui;
 
-    QTimer *pTimer;
-    QModbusMaster *pModbusMaster;
-    int m_temperatureSensor[5];
-    int m_temperatureSensorBackup;
+    int m_groupSwith;
+    SHeaterRealTimeData heaterRealTimeData[FAN_TOWER_GROUP];
 };
-
 #endif // CHEATERREALTIMEDATA_H

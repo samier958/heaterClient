@@ -3,16 +3,13 @@
 
 #include <QWidget>
 
-
-#include "qmodbusmaster.h"
-
-using namespace Modbus;
+#include "cheaterclient.h"
+#include "heaterConfig.h"
 
 namespace Ui {
 class CHeaterMainForm;
 }
 
-class QTimer;
 
 class CHeaterMainForm : public QWidget
 {
@@ -29,7 +26,6 @@ public:
     explicit CHeaterMainForm(QWidget *parent = 0);
     ~CHeaterMainForm();
 
-    void setModbusMaster(QModbusMaster *modbusMaster);
 signals:
     void establishNetworkConnection();
     void disconnectNetwork();
@@ -43,12 +39,6 @@ private slots:
 
 private:
     Ui::CHeaterMainForm *ui;
-
-
-    QTimer *pTimer;
-    QModbusMaster *pModbusMaster;
-
-    int m_time[5];
 };
 
 #endif // CHEATERMAINFORM_H

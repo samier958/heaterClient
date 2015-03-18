@@ -2,7 +2,7 @@
 #include "ui_cheaterfaultinfo.h"
 
 
-#include "heatermodbusoffsetaddress.h"
+#include "heaterConfig.h"
 #include "cheaterclient.h"
 
 CHeaterFaultInfo::CHeaterFaultInfo(QWidget *parent) :
@@ -23,34 +23,32 @@ CHeaterFaultInfo::~CHeaterFaultInfo()
     delete ui;
 }
 
-
-void CHeaterFaultInfo::setModbusMaster(QModbusMaster *modbusMaster)
-{
-    pModbusMaster = modbusMaster;
-}
 void CHeaterFaultInfo::showHeaterFaultInfo()
 {
+    /*
     for(int i = 0; i < 5; i ++){
         for(int j = 0; j < 7; j ++){
             if(!m_faultInfo[i]){pFaultInfoLabel[i]->setText(faultInfoString[6]);break;}
             if(m_faultInfo[i] & (1 << j)){pFaultInfoLabel[i]->setText(faultInfoString[j]);}
         }
     }
+    */
 }
 
 void CHeaterFaultInfo::updateHeaterFaultInfo()
 {
-    QModbusRegisters faultInfoRegisters(HEATER_FAULT_STATUS_ADDR, 1);
+    /*
+    QModbusRegisters faultInfoRegisters(HEATER_FAULT_STATUS_BASE, HEATER_FAULT_STATUS_LENGTH);
     pModbusMaster->connect();
-    for(int i = 0; i < 5; i ++){
-        faultInfoRegisters.setAddress(HEATER_FAULT_STATUS_ADDR + MODBUS_OFFSET_ADDR * i);
-        pModbusMaster->readInputRegisters(faultInfoRegisters);
-        m_faultInfo[i] = faultInfoRegisters.getUInteger16(0);
-    }
+    pModbusMaster->readInputRegisters(faultInfoRegisters);
     pModbusMaster->close();
+    for(int i = 0; i < 5; i ++){
+        m_faultInfo[i] = faultInfoRegisters.getUInteger16(i);
+    }
 
 
     showHeaterFaultInfo();
+    */
 }
 
 void CHeaterFaultInfo::reflashHeaterControlForm(int index)

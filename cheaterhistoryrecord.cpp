@@ -1,7 +1,7 @@
 #include "cheaterhistoryrecord.h"
 #include "ui_cheaterhistoryrecord.h"
 
-#include "heatermodbusoffsetaddress.h"
+#include "heaterConfig.h"
 
 #include "cheaterclient.h"
 
@@ -19,15 +19,10 @@ CHeaterHistoryRecord::~CHeaterHistoryRecord()
 {
     delete ui;
 }
-void CHeaterHistoryRecord::setModbusMaster(QModbusMaster *modbusMaster)
-{
-    pModbusMaster = modbusMaster;
-}
-
-
 
 void CHeaterHistoryRecord::updateHeaterHistoryRecord()
 {
+    /*
     //work record
     QModbusRegisters workRecordRegisters(HEATER_WORK_RECORD_BASE, HEATER_WORK_RECORD_LENGTH);
     pModbusMaster->connect();
@@ -50,26 +45,29 @@ void CHeaterHistoryRecord::updateHeaterHistoryRecord()
         }
     }
 
-
+    */
 }
 void CHeaterHistoryRecord::showHeaterHistoryRecord()
 {
+    /*
     ui->workRecord->clear();
     ui->workRecord->clear();
     for(int i = 0; i < HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_NUM; i ++){
         ui->workRecord->addItem(m_workRecord[i]);
         ui->faultRecord->addItem(m_faultRecord[i]);
-    };
+    }
+    */
 }
 
 
 void CHeaterHistoryRecord::reflashHeaterControlForm(int index)
 {
-    if(CHeaterClient::HistoryRecord == index){updateHeaterHistoryRecord();}
+    if(CHeaterClient::HistoryRecord == index){/*updateHeaterHistoryRecord();*/}
 }
 
 void CHeaterHistoryRecord::on_read_released()
 {
+    /*
     QModbusRegisters recordTimeRegisters(HEATER_HISTORY_RECORD_BASE, HEATER_HISTORY_RECORD_ITEM_LENGTH);
     int time[HEATER_HISTORY_RECORD_TIME_ITEM];
     bool ok;
@@ -85,12 +83,13 @@ void CHeaterHistoryRecord::on_read_released()
     pModbusMaster->connect();
     pModbusMaster->writeRegisters(recordTimeRegisters);
     pModbusMaster->close();
-
+    */
 
 }
 
 void CHeaterHistoryRecord::on_cancle_released()
 {
+    /*
     QDate date = QDate::currentDate();
     QTime time = QTime::currentTime();
     ui->recordTimeYear->setText(QString::number(date.year()));
@@ -98,4 +97,5 @@ void CHeaterHistoryRecord::on_cancle_released()
     ui->recordTimeDay->setText(QString::number(date.day()));
     ui->recordTimeHour->setText(QString::number(time.hour()));
     ui->recordTimeMinute->setText(QString::number(time.minute()));
+    */
 }
