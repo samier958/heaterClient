@@ -31,7 +31,6 @@ signals:
     void disconnectNetwork();
 
 public slots:
-    void reflashHeaterControlForm(int index);
 private slots:
     void updateHeaterSystemTime();
     void showHeaterSystemTime();

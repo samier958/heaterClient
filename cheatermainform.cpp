@@ -38,8 +38,3 @@ void CHeaterMainForm::showHeaterSystemTime()
     ui->systemTime->setText(timeString);
     */
 }
-void CHeaterMainForm::reflashHeaterControlForm(int index)
-{
-    if(CHeaterClient::MainForm == index){}
-    else{}
-}

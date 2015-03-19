@@ -40,13 +40,15 @@ public:
     explicit CHeaterParameterSettings(QWidget *parent = 0);
     ~CHeaterParameterSettings();
 
+    SHeaterParameterSettings heaterParameterSetting[FAN_TOWER_GROUP];
+    SHeaterParameterSettings parameterSettingSyncToRemoteDevices[FAN_TOWER_GROUP];
+
+signals:
+    void sendClientServerCommand(int);
 public slots:
-    void reflashHeaterControlForm(int index);
+    void showHeaterParameterSettings();
 
 private slots:
-    void showHeaterParameterSettings();
-    void updateHeaterParameterSettings();
-    
     void on_heaterSwitch_currentIndexChanged(int index);
 
     void on_apply_released();
@@ -56,11 +58,7 @@ private slots:
 private:
     Ui::CHeaterParameterSettings *ui;
 
-
-    QModbusMaster *pModbusMaster;
-
-    SHeaterParameterSettings heaterParameterSetting[FAN_TOWER_GROUP];
-
+    int m_groupSwith;
 };
 
 #endif // CHEATERPARAMETERSETTINGS_H

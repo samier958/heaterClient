@@ -25,16 +25,18 @@ public:
     explicit CHeaterRealTimeData(QWidget *parent = 0);
     ~CHeaterRealTimeData();
 
+    SHeaterRealTimeData heaterRealTimeData[FAN_TOWER_GROUP];
+
+signals:
+    void sendClientServerCommand(int);
 public slots:
-    void reflashHeaterControlForm(int index);
-private slots:
     void showHeaterRealTimeData();
+private slots:
     void on_heaterGroupSwith_currentIndexChanged(int index);
 
 private:
     Ui::CHeaterRealTimeData *ui;
 
     int m_groupSwith;
-    SHeaterRealTimeData heaterRealTimeData[FAN_TOWER_GROUP];
 };
 #endif // CHEATERREALTIMEDATA_H

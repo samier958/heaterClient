@@ -2,6 +2,7 @@
 #include "ui_cheaterrealtimedata.h"
 
 #include "cheaterclient.h"
+#include "cheaterclientserver.h"
 
 #include <QDebug>
 
@@ -37,13 +38,6 @@ void CHeaterRealTimeData::showHeaterRealTimeData()
     tempString = QString::number(((double)(heaterRealTimeData[m_groupSwith].temperatureSensorBackup)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
     ui->tempSensorBackup->setText(tempString);
 }
-
-void CHeaterRealTimeData::reflashHeaterControlForm(int index)
-{
-    if(CHeaterClient::RealTimeData == index){}
-    else{}
-}
-
 
 void CHeaterRealTimeData::on_heaterGroupSwith_currentIndexChanged(int index)
 {

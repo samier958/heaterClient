@@ -26,28 +26,51 @@ class CHeaterClientServer : public QThread
 {
     Q_OBJECT
 public:
+    enum CLIENT_SERVER_COMMAND{
+        InfoPreviewReadCmd = 0,
+        MainFormReadCmd,
+        RealTimeDataReadCmd,
+        RealTimeDataWriteCmd,
+        ParameterSettingReadCmd,
+        ParameterSettingWriteCmd,
+        FaultInfoReadCmd,
+        HistoryRecordFixedTimeCmd,
+        HistoryRecordWorkOrFaultCmd,
+        ClientServerCmd_End
+    };
 
-    typedef struct _sync_frequency{
-        int infoPreviewFrequency;
-        int formFrequency;
-    }SSyncFrequency;
+    typedef struct _client_server_command_history{
+        int currentCommand;
+        int lastCommand;
+    }SClientServerCommandHistory;
 
     CHeaterClientServer(QString ipAddr, QObject *parent = 0);
     ~CHeaterClientServer();
     void setHeaterInfoPreview(CHeaterClient::SHeaterInfoPreview *heaterInfoPreview);
+    void setHeaterRealTimeData(CHeaterRealTimeData::SHeaterRealTimeData *heaterRealTimeData);
+    void setHeaterParameterSettings(CHeaterParameterSettings::SHeaterParameterSettings *heaterParameterSettings);
+    void setParameterSettingSyncToRemoteDevices(CHeaterParameterSettings::SHeaterParameterSettings *parameterSettingSyncToRemoteDevices);
+    void setHeaterFaultInfo(CHeaterFaultInfo::SHeaterFaultInfo *heaterFaultInfo);
+    void setHeaterHistoryRecordFixedTime(CHeaterHistoryRecord::SHeaterHistoryRecordFixedTime *heaterHistoryRecordFixedTime);
+    void setHeaterHistoryRecordWorkOrFault(CHeaterHistoryRecord::SHeaterHistoryRecordWorkOrFault *heaterHistoryRecordWorkOrFault);
 
-signals:
-    void updateHeaterClientForm(int);
 protected:
     virtual void run();
+signals:
+    void clientServerCommandComplete(int);
+private slots:
+    void clientServerCommandExecute(int cmd);
 private:
     QModbusMaster *pModbusMaster;
 
-    SSyncFrequency syncFrequency;
+    SClientServerCommandHistory clientServerCommandHistory;
     CHeaterClient::SHeaterInfoPreview *pHeaterInfoPreview;
     CHeaterRealTimeData::SHeaterRealTimeData *pHeaterRealTimeData;
     CHeaterParameterSettings::SHeaterParameterSettings *pHeaterParameterSettings;
+    CHeaterParameterSettings::SHeaterParameterSettings *pParameterSettingSyncToRemoteDevices;
     CHeaterFaultInfo::SHeaterFaultInfo *pHeaterFaultInfo;
+    CHeaterHistoryRecord::SHeaterHistoryRecordFixedTime *pHeaterHistoryRecordFixedTime;
+    CHeaterHistoryRecord::SHeaterHistoryRecordWorkOrFault *pHeaterHistoryRecordWorkOrFault;
 };
 
 #endif // CHEATERCLIENTSERVER_H

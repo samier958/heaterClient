@@ -37,14 +37,14 @@ public:
     void showHeaterFaultInfo();
     void updateHeaterFaultInfo();
 
+    SHeaterFaultInfo heaterFaultInfo[FAN_TOWER_GROUP];
+
 public slots:
-    void reflashHeaterControlForm(int index);
 private slots:
 private:
     Ui::CHeaterFaultInfo *ui;
 
     QLabel *pFaultInfoLabel[5];
-    SHeaterFaultInfo heaterFaultInfo[FAN_TOWER_GROUP];
 };
 
 #endif // CHEATERFAULTINFO_H

@@ -25,33 +25,10 @@ CHeaterFaultInfo::~CHeaterFaultInfo()
 
 void CHeaterFaultInfo::showHeaterFaultInfo()
 {
-    /*
     for(int i = 0; i < 5; i ++){
         for(int j = 0; j < 7; j ++){
-            if(!m_faultInfo[i]){pFaultInfoLabel[i]->setText(faultInfoString[6]);break;}
-            if(m_faultInfo[i] & (1 << j)){pFaultInfoLabel[i]->setText(faultInfoString[j]);}
+            if(!(heaterFaultInfo[0].faultInfo[i])){pFaultInfoLabel[i]->setText(faultInfoString[6]);break;}
+            if((heaterFaultInfo[0].faultInfo[i]) & (1 << j)){pFaultInfoLabel[i]->setText(faultInfoString[j]);}
         }
     }
-    */
-}
-
-void CHeaterFaultInfo::updateHeaterFaultInfo()
-{
-    /*
-    QModbusRegisters faultInfoRegisters(HEATER_FAULT_STATUS_BASE, HEATER_FAULT_STATUS_LENGTH);
-    pModbusMaster->connect();
-    pModbusMaster->readInputRegisters(faultInfoRegisters);
-    pModbusMaster->close();
-    for(int i = 0; i < 5; i ++){
-        m_faultInfo[i] = faultInfoRegisters.getUInteger16(i);
-    }
-
-
-    showHeaterFaultInfo();
-    */
-}
-
-void CHeaterFaultInfo::reflashHeaterControlForm(int index)
-{
-    if(CHeaterClient::FaultInfo == index){updateHeaterFaultInfo();}
 }

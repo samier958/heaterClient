@@ -24,44 +24,44 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
         heaterInfoPreview[i].faultStatus = false;
     }
 
-    CHeaterMainForm *pHeaterMainForm;
     pStackedWidget = ui->sessionStackContainer;
     pHeaterMainForm = new CHeaterMainForm(this);
     pStackedWidget->insertWidget(MainForm, pHeaterMainForm);
 
     //connect(pHeaterMainForm, SIGNAL(establishNetworkConnection()), this, SLOT(establishNetworkConnectionHub()));
     //connect(pHeaterMainForm, SIGNAL(disconnectNetwork()), this, SLOT(disconnectNetworkHub()));
-    connect(this, SIGNAL(updateControlForm(int)), pHeaterMainForm, SLOT(reflashHeaterControlForm(int)));
+    //connect(this, SIGNAL(updateControlForm(int)), pHeaterMainForm, SLOT(reflashHeaterControlForm(int)));
 
-    CHeaterRealTimeData *pHeaterRealTimeData;
     pHeaterRealTimeData = new CHeaterRealTimeData(this);
     pStackedWidget->insertWidget(RealTimeData, pHeaterRealTimeData);
-    connect(this, SIGNAL(updateControlForm(int)), pHeaterRealTimeData, SLOT(reflashHeaterControlForm(int)));
 
-    CHeaterParameterSettings *pHeaterParameterSettings;
     pHeaterParameterSettings = new CHeaterParameterSettings(this);
     pStackedWidget->insertWidget(ParameterSetting, pHeaterParameterSettings);
-    connect(this, SIGNAL(updateControlForm(int)), pHeaterParameterSettings, SLOT(reflashHeaterControlForm(int)));
+    connect(pHeaterParameterSettings, SIGNAL(sendClientServerCommand(int)), this, SIGNAL(sendClientServerCommand(int)));
 
-    CHeaterFaultInfo *pHeaterFaultInfo;
     pHeaterFaultInfo = new CHeaterFaultInfo(this);
     pStackedWidget->insertWidget(FaultInfo, pHeaterFaultInfo);
-    connect(this, SIGNAL(updateControlForm(int)), pHeaterFaultInfo, SLOT(reflashHeaterControlForm(int)));
 
-    CHeaterHistoryRecord *pHeaterHistoryRecord;
     pHeaterHistoryRecord = new CHeaterHistoryRecord(this);
     pStackedWidget->insertWidget(HistoryRecord, pHeaterHistoryRecord);
-    connect(this, SIGNAL(updateControlForm(int)), pHeaterHistoryRecord, SLOT(reflashHeaterControlForm(int)));
-
+    connect(pHeaterHistoryRecord, SIGNAL(sendClientServerCommand(int)), this, SIGNAL(sendClientServerCommand(int)));
 
     pStackedWidget->setCurrentIndex(MainForm);
-    emit updateControlForm(MainForm);
     connect(ui->functionSwitchButtonGroup, SIGNAL(buttonReleased(int)), this, SLOT(functionSwitchButtonGroupStatusChanged(int)));
 
     pHeaterClientServer[0] = new CHeaterClientServer("192.168.1.111");
-    pHeaterClientServer[0]->setHeaterInfoPreview(&(heaterInfoPreview[0]));
+    pHeaterClientServer[0]->setHeaterInfoPreview(&(this->heaterInfoPreview[0]));
+    pHeaterClientServer[0]->setHeaterRealTimeData(&(pHeaterRealTimeData->heaterRealTimeData[0]));
+    pHeaterClientServer[0]->setHeaterParameterSettings(&(pHeaterParameterSettings->heaterParameterSetting[0]));
+    pHeaterClientServer[0]->setParameterSettingSyncToRemoteDevices(&(pHeaterParameterSettings->parameterSettingSyncToRemoteDevices[0]));
+    pHeaterClientServer[0]->setHeaterFaultInfo(&(pHeaterFaultInfo->heaterFaultInfo[0]));
+    pHeaterClientServer[0]->setHeaterHistoryRecordFixedTime(&(pHeaterHistoryRecord->heaterHistoryRecordFixedTime[0]));
+    pHeaterClientServer[0]->setHeaterHistoryRecordWorkOrFault(&(pHeaterHistoryRecord->heaterHistoryRecordWorkOrFault[0]));
     pHeaterClientServer[0]->start();
-    connect(pHeaterClientServer[0], SIGNAL(updateHeaterClientForm(int)), this, SLOT(reflashHeaterControlForm(int)));
+
+
+    connect(pHeaterClientServer[0], SIGNAL(clientServerCommandComplete(int)), this, SLOT(showHeaterClientCommandComplete(int)));
+    connect(this, SIGNAL(sendClientServerCommand(int)), pHeaterClientServer[0], SLOT(clientServerCommandExecute(int)));
 
 }
 
@@ -72,16 +72,58 @@ CHeaterClient::~CHeaterClient()
 void CHeaterClient::functionSwitchButtonGroupStatusChanged(int id)
 {
     pStackedWidget->setCurrentIndex(-(id + MainForm));
-    emit updateControlForm(-(id + MainForm));
+    switch ((-(id + MainForm))) {
+        case MainForm:
+             emit sendClientServerCommand(CHeaterClientServer::MainFormReadCmd);
+             break;
+        case RealTimeData:
+             emit sendClientServerCommand(CHeaterClientServer::RealTimeDataReadCmd);
+             break;
+        case ParameterSetting:
+             emit sendClientServerCommand(CHeaterClientServer::ParameterSettingReadCmd);
+             break;
+        case FaultInfo:
+             emit sendClientServerCommand(CHeaterClientServer::FaultInfoReadCmd);
+             break;
+        case HistoryRecord:
+             emit sendClientServerCommand(CHeaterClientServer::HistoryRecordWorkOrFaultCmd);
+             break;
+        default:
+            break;
+    }
 }
-
-void CHeaterClient::reflashHeaterControlForm(int index)
+void CHeaterClient::showHeaterClientCommandComplete(int cmd)
 {
-    if(CHeaterClient::InfoPreview == index){showHeaterUnitCurrentStatus();}
-    else {emit updateControlForm(index);}
+    qDebug()<<"Client Show Form:"<<cmd;
+    switch (cmd) {
+    case CHeaterClientServer::InfoPreviewReadCmd:
+         this->showHeaterInfoPreview();
+         break;
+    case CHeaterClientServer::MainFormReadCmd:
+         break;
+    case CHeaterClientServer::RealTimeDataReadCmd:
+         pHeaterRealTimeData->showHeaterRealTimeData();
+         break;
+    case CHeaterClientServer::ParameterSettingReadCmd:
+         pHeaterParameterSettings->showHeaterParameterSettings();
+         break;
+    case CHeaterClientServer::ParameterSettingWriteCmd:
+        qDebug()<<"Parameter Setting Write.";
+         break;
+    case CHeaterClientServer::FaultInfoReadCmd:
+         pHeaterFaultInfo->showHeaterFaultInfo();
+         break;
+    case CHeaterClientServer::HistoryRecordFixedTimeCmd:
+         break;
+    case CHeaterClientServer::HistoryRecordWorkOrFaultCmd:
+         pHeaterHistoryRecord->showHeaterHistoryRecord();
+         break;
+    default:
+         break;
+    }
 }
 
-void CHeaterClient::showHeaterUnitCurrentStatus()
+void CHeaterClient::showHeaterInfoPreview()
 {
     if(heaterInfoPreview[0].networkStatus) {ui->networkStatus_0->setText(networkStatusString[0]);}
     else {ui->networkStatus_0->setText(networkStatusString[1]);}

@@ -14,7 +14,11 @@ namespace Ui {
 class CHeaterClient;
 }
 
-
+class CHeaterMainForm;
+class CHeaterRealTimeData;
+class CHeaterParameterSettings;
+class CHeaterFaultInfo;
+class CHeaterHistoryRecord;
 
 class QStackedWidget;
 class CHeaterClientServer;
@@ -31,7 +35,7 @@ public:
         ParameterSetting,
         FaultInfo,
         HistoryRecord,
-        ChildSessionForm_Num
+        ChildSessionForm_End
     };
     QString networkStatusString[3] = {
         tr("连接"),
@@ -51,21 +55,28 @@ public:
 
     explicit CHeaterClient(QWidget *parent = 0);
     ~CHeaterClient();
-    void showHeaterUnitCurrentStatus();
+    void showHeaterInfoPreview();
+
+
+    SHeaterInfoPreview heaterInfoPreview[FAN_TOWER_GROUP];
 
 signals:
-    void updateControlForm(int);
+    void sendClientServerCommand(int);
 private slots:
     void functionSwitchButtonGroupStatusChanged(int id);
-    void reflashHeaterControlForm(int index);
+    void showHeaterClientCommandComplete(int cmd);
     
 private:
 
     Ui::CHeaterClient *ui;
 
-    QStackedWidget *pStackedWidget;
 
-    SHeaterInfoPreview heaterInfoPreview[FAN_TOWER_GROUP];
+    CHeaterMainForm *pHeaterMainForm;
+    CHeaterRealTimeData *pHeaterRealTimeData;
+    CHeaterParameterSettings *pHeaterParameterSettings;
+    CHeaterFaultInfo *pHeaterFaultInfo;
+    CHeaterHistoryRecord *pHeaterHistoryRecord;
+    QStackedWidget *pStackedWidget;
 
     CHeaterClientServer *pHeaterClientServer[FAN_TOWER_GROUP];
 };
