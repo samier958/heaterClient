@@ -19,9 +19,17 @@ void CHeaterClientServer::setHeaterInfoPreview(CHeaterClient::SHeaterInfoPreview
 {
     pHeaterInfoPreview = heaterInfoPreview;
 }
-void CHeaterClientServer::setHeaterRealTimeData(CHeaterRealTimeData::SHeaterRealTimeData *heaterRealTimeData)
+void CHeaterClientServer::setHeaterRealTimeDataTemp(CHeaterRealTimeData::SHeaterRealTimeDataTemp *heaterRealTimeDataTemp)
 {
-    pHeaterRealTimeData = heaterRealTimeData;
+    pHeaterRealTimeDataTemp = heaterRealTimeDataTemp;
+}
+void CHeaterClientServer::setHeaterRealTimeDataRemoteControl(CHeaterRealTimeData::SHeaterRealTimeDataRemoteControl *heaterRealTimeDataRemoterControl)
+{
+    pHeaterRealTimeDataRemoterControl = heaterRealTimeDataRemoterControl;
+}
+void CHeaterClientServer::setRealTimeDataRemoterControlSyncToRemoteDevices(CHeaterRealTimeData::SHeaterRealTimeDataRemoteControl *realTimeDataRemoterControlSyncToRemoteDevices)
+{
+    pRealTimeDataRemoterControlSyncToRemoteDevices = realTimeDataRemoterControlSyncToRemoteDevices;
 }
 void CHeaterClientServer::setHeaterParameterSettings(CHeaterParameterSettings::SHeaterParameterSettings *heaterParameterSettings)
 {
@@ -53,12 +61,13 @@ void CHeaterClientServer::run()
     QModbusRegisters faultStatusRegister(HEATER_FAULT_STATUS_BASE, HEATER_FAULT_STATUS_LENGTH);
 
     QModbusRegisters temperatureSensorsRegisters(HEATER_TEMPERATURE_SENSOR_BASE, HEATER_TEMPERATURE_SENSOR_LENGTH);
+    QModbusRegisters remoteControlRegisters(HEATER_WORK_SWITCH_ADDR, 1);
 
     QModbusRegisters parameterSettingsRegisters(HEATER_PARAMETER_SETTINGS_BASE, HEATER_PARAMETER_SETTINGS_LENGTH);
 
     QModbusRegisters faultInfoRegisters(HEATER_FAULT_STATUS_BASE, HEATER_FAULT_STATUS_LENGTH);
 
-    QModbusRegisters recordTimeRegisters(HEATER_RECORD_TIME_BASE, HEATER_RECORD_TIME_LENGTH);
+    QModbusRegisters recordTimeRegisters(HEATER_RECORD_TIME_BASE, HEATER_RECORD_TIME_LENGTH + 1);
     QModbusRegisters recordTimeValidTagRegisters(HEATER_RECORD_TIME_VALID_TAG_ADDR, 1);
     QModbusRegisters recordDataRegisters(HEATER_HISTORY_RECORD_BASE, HEATER_HISTORY_RECORD_ITEM_LENGTH);
 
@@ -77,6 +86,7 @@ void CHeaterClientServer::run()
         switch (cmd) {
             case InfoPreviewReadCmd:
                     //info preview
+
                     modbusErr = pModbusMaster->lastError();
                     if(modbusErr.isValid()) {pHeaterInfoPreview->networkStatus = NETWORK_OFFLINE;continue;}
                     else {pHeaterInfoPreview->networkStatus = NETWORK_ONLINE;}
@@ -99,15 +109,33 @@ void CHeaterClientServer::run()
                     clientServerCommandHistory.lastCommand = clientServerCommandHistory.currentCommand ;
                     clientServerCommandHistory.currentCommand  = serverCommand;
                     break;
-            case RealTimeDataReadCmd:
+            case RealTimeDataTempReadCmd:
                     pModbusMaster->readInputRegisters(temperatureSensorsRegisters);
-                    for(int i = 0; i < 5; i ++){pHeaterRealTimeData->temperatureSensor[i] = temperatureSensorsRegisters.getInteger16(i);}
-                    pHeaterRealTimeData->temperatureSensorBackup = temperatureSensorsRegisters.getInteger16(HEATER_TEMPERATURE_SENSOR_LENGTH - 1);
+                    for(int i = 0; i < 5; i ++){pHeaterRealTimeDataTemp->temperatureSensor[i] = temperatureSensorsRegisters.getInteger16(i);}
+                    pHeaterRealTimeDataTemp->temperatureSensorBackup = temperatureSensorsRegisters.getInteger16(HEATER_TEMPERATURE_SENSOR_LENGTH - 1);
                     //switch command execute
                     serverCommand = clientServerCommandHistory.lastCommand;
                     clientServerCommandHistory.lastCommand = clientServerCommandHistory.currentCommand ;
                     clientServerCommandHistory.currentCommand  = serverCommand;
-
+                    break;
+            case RealTimeDataRemoteControlReadCmd:
+                    for(int i = 0; i < HEATER_QUANITY_NUM; i ++){
+                        remoteControlRegisters.setAddress(HEATER_WORK_SWITCH_ADDR + HEATER_MODBUS_OFFSET_ADDR * i);
+                        pModbusMaster->readInputRegisters(remoteControlRegisters);
+                        pHeaterRealTimeDataRemoterControl->remoteControl[i] = remoteControlRegisters.getInteger16(0);
+                    }
+                    clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
+                    clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
+                    break;
+            case RealTimeDataRemoteControlWriteCmd:
+                    for(int i = 0; i < HEATER_QUANITY_NUM; i ++){
+                        remoteControlRegisters.setAddress(HEATER_WORK_SWITCH_ADDR + HEATER_MODBUS_OFFSET_ADDR * i);
+                        remoteControlRegisters.setInteger16(0, pRealTimeDataRemoterControlSyncToRemoteDevices->remoteControl[i]);
+                        //sleep(1);
+                        pModbusMaster->writeRegisters(remoteControlRegisters);
+                    }
+                    clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
+                    clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
                     break;
             case ParameterSettingReadCmd:
                     parameterSettingsRegisters.setAddress(HEATER_PARAMETER_SETTINGS_BASE + pHeaterParameterSettings->heaterIndex * HEATER_MODBUS_OFFSET_ADDR);
@@ -181,13 +209,15 @@ void CHeaterClientServer::run()
 
                     break;
             case HistoryRecordFixedTimeCmd:
-                    #define RECORD_VALID 1
-                    #define RECORD_NO_VALID 0
-                    if(pHeaterHistoryRecordFixedTime->wait){
-                        for(int i = 0; i < HEATER_RECORD_TIME_BASE; i ++) { recordTimeRegisters.setInteger16(i, pHeaterHistoryRecordFixedTime->time[i]);}
+                    #define RECORD_VALID 0
+                    #define RECORD_NO_VALID 1
+                    if(!(pHeaterHistoryRecordFixedTime->wait)){
+                        for(int i = 0; i < HEATER_RECORD_TIME_LENGTH; i ++) {recordTimeRegisters.setInteger16(i, pHeaterHistoryRecordFixedTime->time[i]);}
+                        recordTimeRegisters.setInteger16(HEATER_RECORD_TIME_LENGTH, 0x00fe);
                         pModbusMaster->writeRegisters(recordTimeRegisters);
                         pHeaterHistoryRecordFixedTime->wait = 1;
                     }
+
                     pModbusMaster->readInputRegisters(recordTimeValidTagRegisters);
                     pHeaterHistoryRecordFixedTime->valid = recordTimeValidTagRegisters.getInteger16(0);
                     //switch command execute
@@ -197,7 +227,7 @@ void CHeaterClientServer::run()
                         clientServerCommandHistory.currentCommand  = serverCommand;
                     }
                     else {
-                        recordDataRegisters.setAddress((HEATER_HISTORY_RECORD_BASE + HEATER_HISTORY_RECORD_ITEM_LENGTH * (pHeaterHistoryRecordFixedTime->index - 1)));
+                        recordDataRegisters.setAddress((HEATER_HISTORY_RECORD_BASE + HEATER_HISTORY_RECORD_ITEM_LENGTH * (pHeaterHistoryRecordFixedTime->index)));
                         pModbusMaster->readInputRegisters(recordDataRegisters);
                         pHeaterHistoryRecordFixedTime->temperature   = recordDataRegisters.getInteger16(0);
                         pHeaterHistoryRecordFixedTime->controlMode   = recordDataRegisters.getInteger16(1);
@@ -206,6 +236,7 @@ void CHeaterClientServer::run()
                         pHeaterHistoryRecordFixedTime->outputPort    = recordDataRegisters.getInteger16(4);
                         pHeaterHistoryRecordFixedTime->faultInfo     = recordDataRegisters.getInteger16(5);
 
+                        pHeaterHistoryRecordFixedTime->wait = 0;
                         clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
                         clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
                     }

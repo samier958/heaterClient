@@ -48,6 +48,31 @@ public:
         SWorkOrFaultRecord faultRecord[HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_NUM];
     }SHeaterHistoryRecordWorkOrFault;
 
+    const QString controlModeString[5] = {
+        tr("自动"),
+        tr("停止"),
+        tr("加热"),
+        tr("吹风"),
+        tr("其它")
+    };
+    const QString runningStatusString[5] = {
+        tr("停止"),
+        tr("关闭"),
+        tr("加热"),
+        tr("吹风"),
+        tr("其它")
+    };
+    const QString faultInfoString[8] = {
+        tr("PT100故障"),
+        tr("温度异常"),
+        tr("风机过载"),
+        tr("PTC无电"),
+        tr("干烧故障"),
+        tr("设定错误"),
+        tr("无故障"),
+        tr("未知")
+    };
+
     const QString workOrFaultRecordString[19] = {
         tr("未定义"),
         tr("控制器PT100温度检测模块通信故障"),
@@ -81,8 +106,8 @@ public:
     explicit CHeaterHistoryRecord(QWidget *parent = 0);
     ~CHeaterHistoryRecord();
 
-    void updateHeaterHistoryRecord();
-    void showHeaterHistoryRecord();
+    void showHeaterHistoryRecordFixedTime();
+    void showHeaterHistoryRecordWorkOrFault();
 
     void currentTimeSetToRecord();
 
@@ -96,6 +121,8 @@ private slots:
     void on_read_released();
 
     void on_cancle_released();
+
+    void on_hearterFixedTimeIndex_currentIndexChanged(int index);
 
 private:
     Ui::CHeaterHistoryRecord *ui;

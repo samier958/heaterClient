@@ -13,17 +13,17 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTabWidget" name="tabWidget">
+  <widget class="QTabWidget" name="realTimeDataTabWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>0</x>
      <y>60</y>
      <width>501</width>
      <height>371</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -256,9 +256,9 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>40</y>
-       <width>231</width>
+       <x>90</x>
+       <y>30</y>
+       <width>311</width>
        <height>241</height>
       </rect>
      </property>
@@ -268,7 +268,7 @@
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>TextLabel</string>
+           <string>1#加热器</string>
           </property>
          </widget>
         </item>
@@ -286,7 +286,41 @@
          </spacer>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox"/>
+         <widget class="QComboBox" name="workSwitch_1">
+          <item>
+           <property name="text">
+            <string>停止</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>关闭</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>加热</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>吹风</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_15">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -295,7 +329,7 @@
         <item>
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>TextLabel</string>
+           <string>2#加热器</string>
           </property>
          </widget>
         </item>
@@ -313,7 +347,41 @@
          </spacer>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_2"/>
+         <widget class="QComboBox" name="workSwitch_2">
+          <item>
+           <property name="text">
+            <string>停止</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>关闭</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>加热</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>吹风</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_16">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -322,7 +390,7 @@
         <item>
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string>TextLabel</string>
+           <string>3#加热器</string>
           </property>
          </widget>
         </item>
@@ -340,7 +408,41 @@
          </spacer>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_3"/>
+         <widget class="QComboBox" name="workSwitch_3">
+          <item>
+           <property name="text">
+            <string>停止</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>关闭</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>加热</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>吹风</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_17">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -349,7 +451,7 @@
         <item>
          <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>TextLabel</string>
+           <string>4#加热器</string>
           </property>
          </widget>
         </item>
@@ -367,7 +469,41 @@
          </spacer>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_4"/>
+         <widget class="QComboBox" name="workSwitch_4">
+          <item>
+           <property name="text">
+            <string>停止</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>关闭</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>加热</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>吹风</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_18">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -376,7 +512,7 @@
         <item>
          <widget class="QLabel" name="label_10">
           <property name="text">
-           <string>TextLabel</string>
+           <string>5#加热器</string>
           </property>
          </widget>
         </item>
@@ -394,7 +530,41 @@
          </spacer>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_5"/>
+         <widget class="QComboBox" name="workSwitch_5">
+          <item>
+           <property name="text">
+            <string>停止</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>关闭</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>加热</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>吹风</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_19">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -411,9 +581,9 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_13">
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="apply">
         <property name="text">
-         <string>PushButton</string>
+         <string>应用</string>
         </property>
        </widget>
       </item>
@@ -431,9 +601,9 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="cancle">
         <property name="text">
-         <string>PushButton</string>
+         <string>取消</string>
         </property>
        </widget>
       </item>

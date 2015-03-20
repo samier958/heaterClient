@@ -34,6 +34,7 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
 
     pHeaterRealTimeData = new CHeaterRealTimeData(this);
     pStackedWidget->insertWidget(RealTimeData, pHeaterRealTimeData);
+    connect(pHeaterRealTimeData, SIGNAL(sendClientServerCommand(int)), this, SIGNAL(sendClientServerCommand(int)));
 
     pHeaterParameterSettings = new CHeaterParameterSettings(this);
     pStackedWidget->insertWidget(ParameterSetting, pHeaterParameterSettings);
@@ -51,7 +52,9 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
 
     pHeaterClientServer[0] = new CHeaterClientServer("192.168.1.111");
     pHeaterClientServer[0]->setHeaterInfoPreview(&(this->heaterInfoPreview[0]));
-    pHeaterClientServer[0]->setHeaterRealTimeData(&(pHeaterRealTimeData->heaterRealTimeData[0]));
+    pHeaterClientServer[0]->setHeaterRealTimeDataTemp(&(pHeaterRealTimeData->heaterRealTimeDataTemp[0]));
+    pHeaterClientServer[0]->setHeaterRealTimeDataRemoteControl(&(pHeaterRealTimeData->heaterRealTimeDataRemoterControl[0]));
+    pHeaterClientServer[0]->setRealTimeDataRemoterControlSyncToRemoteDevices(&(pHeaterRealTimeData->realTimeDataRemoterControlSyncToRemoteDevices[0]));
     pHeaterClientServer[0]->setHeaterParameterSettings(&(pHeaterParameterSettings->heaterParameterSetting[0]));
     pHeaterClientServer[0]->setParameterSettingSyncToRemoteDevices(&(pHeaterParameterSettings->parameterSettingSyncToRemoteDevices[0]));
     pHeaterClientServer[0]->setHeaterFaultInfo(&(pHeaterFaultInfo->heaterFaultInfo[0]));
@@ -77,7 +80,7 @@ void CHeaterClient::functionSwitchButtonGroupStatusChanged(int id)
              emit sendClientServerCommand(CHeaterClientServer::MainFormReadCmd);
              break;
         case RealTimeData:
-             emit sendClientServerCommand(CHeaterClientServer::RealTimeDataReadCmd);
+             emit sendClientServerCommand(CHeaterClientServer::RealTimeDataTempReadCmd);
              break;
         case ParameterSetting:
              emit sendClientServerCommand(CHeaterClientServer::ParameterSettingReadCmd);
@@ -101,22 +104,29 @@ void CHeaterClient::showHeaterClientCommandComplete(int cmd)
          break;
     case CHeaterClientServer::MainFormReadCmd:
          break;
-    case CHeaterClientServer::RealTimeDataReadCmd:
-         pHeaterRealTimeData->showHeaterRealTimeData();
+    case CHeaterClientServer::RealTimeDataTempReadCmd:
+         pHeaterRealTimeData->showHeaterRealTimeDataTemp();
+         break;
+    case CHeaterClientServer::RealTimeDataRemoteControlReadCmd:
+         pHeaterRealTimeData->showHeaterRealTimeDataRemoteControl();
+         break;
+    case CHeaterClientServer::RealTimeDataRemoteControlWriteCmd:
+         qDebug()<<"Real Time Data Remote Control Write Complete.";
          break;
     case CHeaterClientServer::ParameterSettingReadCmd:
          pHeaterParameterSettings->showHeaterParameterSettings();
          break;
     case CHeaterClientServer::ParameterSettingWriteCmd:
-        qDebug()<<"Parameter Setting Write.";
+         qDebug()<<"Parameter Setting Write Complete.";
          break;
     case CHeaterClientServer::FaultInfoReadCmd:
          pHeaterFaultInfo->showHeaterFaultInfo();
          break;
     case CHeaterClientServer::HistoryRecordFixedTimeCmd:
+         pHeaterHistoryRecord->showHeaterHistoryRecordFixedTime();
          break;
     case CHeaterClientServer::HistoryRecordWorkOrFaultCmd:
-         pHeaterHistoryRecord->showHeaterHistoryRecord();
+         pHeaterHistoryRecord->showHeaterHistoryRecordWorkOrFault();
          break;
     default:
          break;

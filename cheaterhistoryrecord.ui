@@ -60,7 +60,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QComboBox" name="hearterTag">
+       <widget class="QComboBox" name="hearterFixedTimeIndex">
         <item>
          <property name="text">
           <string>#1加热器</string>

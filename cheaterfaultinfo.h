@@ -18,7 +18,7 @@ class CHeaterFaultInfo : public QWidget
     Q_OBJECT
     
 public:
-    QString faultInfoString[8] = {
+    const QString faultInfoString[8] = {
         tr("PT100故障"),
         tr("温度异常"),
         tr("风机过载"),

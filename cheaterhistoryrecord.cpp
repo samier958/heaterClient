@@ -14,7 +14,8 @@ CHeaterHistoryRecord::CHeaterHistoryRecord(QWidget *parent) :
     ui(new Ui::CHeaterHistoryRecord)
 {
     ui->setupUi(this);
-    heaterHistoryRecordFixedTime[0].valid = 0;
+
+    heaterHistoryRecordFixedTime[0].valid = 1;
     heaterHistoryRecordFixedTime[0].wait = 0;
     heaterHistoryRecordFixedTime[0].index = 0;
 }
@@ -24,11 +25,24 @@ CHeaterHistoryRecord::~CHeaterHistoryRecord()
     delete ui;
 }
 
-void CHeaterHistoryRecord::updateHeaterHistoryRecord()
+void CHeaterHistoryRecord::showHeaterHistoryRecordFixedTime()
 {
+    if(heaterHistoryRecordFixedTime[0].temperature < -1000 || heaterHistoryRecordFixedTime[0].temperature > 1000){heaterHistoryRecordFixedTime[0].temperature = 0;}
+    if(heaterHistoryRecordFixedTime[0].controlMode < -1 || heaterHistoryRecordFixedTime[0].controlMode > 5){heaterHistoryRecordFixedTime[0].controlMode = 4;}
+    if(heaterHistoryRecordFixedTime[0].runningStatus < -1 || heaterHistoryRecordFixedTime[0].runningStatus > 5){heaterHistoryRecordFixedTime[0].temperature = 4;}
+    if(heaterHistoryRecordFixedTime[0].faultInfo < -1 || heaterHistoryRecordFixedTime[0].faultInfo > 8){heaterHistoryRecordFixedTime[0].temperature = 7;}
+    QString tempString;
+    tempString = QString::number(((double)(heaterHistoryRecordFixedTime[0].temperature)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
+    ui->temperature->setText(tempString);
 
+    ui->controlMode->setText(controlModeString[heaterHistoryRecordFixedTime[0].controlMode]);
+    ui->runningStatus->setText(runningStatusString[heaterHistoryRecordFixedTime[0].runningStatus]);
+    for(int i = 0; i < 7; i ++){
+        if(!(heaterHistoryRecordFixedTime[0].faultInfo)){ui->faultInfo->setText(faultInfoString[6]);break;}
+        if((heaterHistoryRecordFixedTime[0].faultInfo) & (1 << i)){ui->faultInfo->setText(faultInfoString[i]);}
+    }
 }
-void CHeaterHistoryRecord::showHeaterHistoryRecord()
+void CHeaterHistoryRecord::showHeaterHistoryRecordWorkOrFault()
 {
     currentTimeSetToRecord();
 
@@ -128,4 +142,9 @@ void CHeaterHistoryRecord::on_read_released()
 void CHeaterHistoryRecord::on_cancle_released()
 {
     currentTimeSetToRecord();
+}
+
+void CHeaterHistoryRecord::on_hearterFixedTimeIndex_currentIndexChanged(int index)
+{
+    heaterHistoryRecordFixedTime[0].index = index;
 }
