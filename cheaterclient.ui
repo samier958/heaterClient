@@ -16,9 +16,9 @@
   <widget class="QStackedWidget" name="sessionStackContainer">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>199</x>
      <y>120</y>
-     <width>600</width>
+     <width>581</width>
      <height>451</height>
     </rect>
    </property>
@@ -44,7 +44,7 @@
      <x>20</x>
      <y>140</y>
      <width>161</width>
-     <height>371</height>
+     <height>451</height>
     </rect>
    </property>
    <property name="title">
@@ -56,7 +56,7 @@
       <x>10</x>
       <y>30</y>
       <width>141</width>
-      <height>141</height>
+      <height>411</height>
      </rect>
     </property>
     <property name="title">
@@ -68,7 +68,7 @@
        <x>10</x>
        <y>30</y>
        <width>124</width>
-       <height>91</height>
+       <height>261</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -84,7 +84,7 @@
         <item>
          <widget class="QLabel" name="networkStatus_0">
           <property name="text">
-           <string>TextLabel</string>
+           <string>  - -</string>
           </property>
          </widget>
         </item>
@@ -102,7 +102,7 @@
         <item>
          <widget class="QLabel" name="averageTemperature_0">
           <property name="text">
-           <string>TextLabel</string>
+           <string>  - -</string>
           </property>
          </widget>
         </item>
@@ -120,86 +120,7 @@
         <item>
          <widget class="QLabel" name="faultStatus_0">
           <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_3">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>210</y>
-      <width>141</width>
-      <height>131</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>机舱</string>
-    </property>
-    <widget class="QWidget" name="layoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>124</width>
-       <height>91</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
-        <item>
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>网络链接：</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="networkStatus_1">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <item>
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>平均温度：</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="averageTemperature_1">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_9">
-        <item>
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>故障状态：</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="faultStatus_1">
-          <property name="text">
-           <string>TextLabel</string>
+           <string>  - -</string>
           </property>
          </widget>
         </item>

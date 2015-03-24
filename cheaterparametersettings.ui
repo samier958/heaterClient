@@ -275,7 +275,7 @@
   <widget class="QPushButton" name="apply">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>290</x>
      <y>430</y>
      <width>75</width>
      <height>23</height>
@@ -288,7 +288,7 @@
   <widget class="QPushButton" name="cancle">
    <property name="geometry">
     <rect>
-     <x>430</x>
+     <x>400</x>
      <y>430</y>
      <width>75</width>
      <height>23</height>
@@ -358,6 +358,19 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="reset">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>430</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>恢复默认值</string>
+   </property>
   </widget>
  </widget>
  <resources/>

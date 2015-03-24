@@ -55,6 +55,8 @@ private slots:
 
     void on_cancle_pressed();
 
+    void on_reset_pressed();
+
 private:
     Ui::CHeaterParameterSettings *ui;
 

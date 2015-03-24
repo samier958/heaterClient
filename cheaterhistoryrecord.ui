@@ -13,17 +13,17 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTabWidget" name="tab_2">
+  <widget class="QTabWidget" name="historyRecord">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
      <width>551</width>
-     <height>441</height>
+     <height>451</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="Tab_1">
     <attribute name="title">
@@ -178,9 +178,9 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tab_5">
+     <widget class="QWidget" name="Tab_5">
       <attribute name="title">
-       <string>Tab 1</string>
+       <string>常规数据</string>
       </attribute>
       <widget class="QLabel" name="label_32">
        <property name="geometry">
@@ -244,7 +244,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>无效</string>
        </property>
       </widget>
       <widget class="QLabel" name="controlMode">
@@ -257,7 +257,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>无效</string>
        </property>
       </widget>
       <widget class="QLabel" name="runningStatus">
@@ -270,7 +270,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>无效</string>
        </property>
       </widget>
       <widget class="QLabel" name="faultInfo">
@@ -283,13 +283,13 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>无效</string>
        </property>
       </widget>
      </widget>
      <widget class="QWidget" name="tab_6">
       <attribute name="title">
-       <string>Tab 2</string>
+       <string>端口状态</string>
       </attribute>
       <widget class="QLabel" name="label_40">
        <property name="geometry">
@@ -431,7 +431,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>无效</string>
        </property>
       </widget>
       <widget class="QLabel" name="externalBurdenPort">
@@ -444,7 +444,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>无效</string>
        </property>
       </widget>
       <widget class="QLabel" name="ptcPowerPort">
@@ -457,7 +457,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>无效</string>
        </property>
       </widget>
       <widget class="QLabel" name="heatingPort">
@@ -470,7 +470,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>无效</string>
        </property>
       </widget>
       <widget class="QLabel" name="radiatingPort">
@@ -483,7 +483,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>无效</string>
        </property>
       </widget>
      </widget>
@@ -536,10 +536,23 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>20</y>
        <width>521</width>
-       <height>361</height>
+       <height>351</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clearWorkRecord">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>390</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>清空记录</string>
      </property>
     </widget>
    </widget>
@@ -551,10 +564,23 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
+       <y>20</y>
        <width>521</width>
-       <height>371</height>
+       <height>361</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clearFaultRecord">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>390</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>清空记录</string>
      </property>
     </widget>
    </widget>

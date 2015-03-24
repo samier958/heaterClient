@@ -13,88 +13,31 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="systemTime">
+  <widget class="QPushButton" name="connect">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>50</y>
-     <width>281</width>
-     <height>16</height>
+     <x>163</x>
+     <y>330</y>
+     <width>75</width>
+     <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Time</string>
+    <string>联机</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QPushButton" name="disconnect">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>190</y>
-     <width>271</width>
-     <height>101</height>
+     <x>350</x>
+     <y>330</y>
+     <width>75</width>
+     <height>23</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboBox"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QPushButton" name="connect">
-        <property name="text">
-         <string>联机</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="disconnect">
-        <property name="text">
-         <string>断开</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
+   <property name="text">
+    <string>断开</string>
+   </property>
   </widget>
  </widget>
  <resources/>

@@ -9,6 +9,9 @@
 #define NETWORK_ONLINE true
 #define NETWORK_OFFLINE false
 
+#define CLIENT_CONFIG_FILE "HeaterClientConfig.ini"
+
+#define LOOP_LOCAL_ADDR "127.0.0.1"
 
 namespace Ui {
 class CHeaterClient;
@@ -56,7 +59,7 @@ public:
     explicit CHeaterClient(QWidget *parent = 0);
     ~CHeaterClient();
     void showHeaterInfoPreview();
-
+    void loadClientConfig();
 
     SHeaterInfoPreview heaterInfoPreview[FAN_TOWER_GROUP];
 
@@ -70,6 +73,8 @@ private:
 
     Ui::CHeaterClient *ui;
 
+    QString m_clientConfigFile;
+    QString m_ipAddr;
 
     CHeaterMainForm *pHeaterMainForm;
     CHeaterRealTimeData *pHeaterRealTimeData;

@@ -12,12 +12,17 @@ CHeaterRealTimeData::CHeaterRealTimeData(QWidget *parent) :
 {
     ui->setupUi(this);
     m_groupSwith = 0;
+    memset(&(heaterRealTimeDataTemp[0]), 0, sizeof(heaterRealTimeDataTemp[0]));
+    memset(&(heaterRealTimeDataRemoterControl[0]), 0, sizeof(heaterRealTimeDataRemoterControl[0]));
+    memset(&(realTimeDataRemoterControlSyncToRemoteDevices[0]), 0, sizeof(realTimeDataRemoterControlSyncToRemoteDevices[0]));
 
     pWorkSwitchGroup[0] = ui->workSwitch_1;
     pWorkSwitchGroup[1] = ui->workSwitch_2;
     pWorkSwitchGroup[2] = ui->workSwitch_3;
     pWorkSwitchGroup[3] = ui->workSwitch_4;
     pWorkSwitchGroup[4] = ui->workSwitch_5;
+
+    showHeaterRealTimeDataTemp();
 }
 
 CHeaterRealTimeData::~CHeaterRealTimeData()
@@ -51,13 +56,14 @@ void CHeaterRealTimeData::showHeaterRealTimeDataRemoteControl()
         pWorkSwitchGroup[i]->setCurrentIndex(heaterRealTimeDataRemoterControl[0].remoteControl[i]);
     }
 }
+/*
 void CHeaterRealTimeData::on_heaterGroupSwith_currentIndexChanged(int index)
 {
     qDebug()<<"index"<<index;
     m_groupSwith = index;
     //showHeaterRealTimeData();
 }
-
+*/
 void CHeaterRealTimeData::on_apply_released()
 {
     for(int i = 0; i <HEATER_QUANITY_NUM; i ++){

@@ -1,9 +1,12 @@
 #include "cheaterclientserver.h"
 
+#include <QDate>
+#include <QTime>
 #include <QDebug>
 
 CHeaterClientServer::CHeaterClientServer(QString ipAddr, QObject *parent)
 {
+    qDebug()<<ipAddr;
     pModbusMaster = new QModbusMaster(ipAddr.toStdString().c_str(), MODBUS_TCP_PORT);
     pModbusMaster->setSlave(MODBUS_SLAVE_ADDR);
 
@@ -57,8 +60,11 @@ void CHeaterClientServer::run()
 {
     QModbusError modbusErr;
 
-    QModbusRegisters averageTemperatureRegister(HEATER_UNIT_AVERAGE_TEMP_ADDR, 1);
-    QModbusRegisters faultStatusRegister(HEATER_FAULT_STATUS_BASE, HEATER_FAULT_STATUS_LENGTH);
+    QModbusRegisters systemTimeRegisters(HEATER_UNIT_SYSTEM_TIME_BASE, HEATER_UNIT_SYSTEM_TIME_LENGTH);
+
+    //QModbusRegisters averageTemperatureRegister(HEATER_UNIT_AVERAGE_TEMP_ADDR, 1);
+    //QModbusRegisters faultStatusRegister(HEATER_FAULT_STATUS_BASE, HEATER_FAULT_STATUS_LENGTH);
+    QModbusRegisters infoPreviewRegisters(HEATER_UNIT_AVERAGE_TEMP_ADDR, HEATER_FAULT_STATUS_LENGTH + (HEATER_FAULT_STATUS_BASE - HEATER_UNIT_AVERAGE_TEMP_ADDR));
 
     QModbusRegisters temperatureSensorsRegisters(HEATER_TEMPERATURE_SENSOR_BASE, HEATER_TEMPERATURE_SENSOR_LENGTH);
     QModbusRegisters remoteControlRegisters(HEATER_WORK_SWITCH_ADDR, 1);
@@ -73,6 +79,11 @@ void CHeaterClientServer::run()
 
     QModbusRegisters workRecordRegisters(HEATER_WORK_RECORD_BASE, HEATER_WORK_RECORD_LENGTH);
     QModbusRegisters faultRecordRegisters(HEATER_FAULT_RECORD_BASE, HEATER_FAULT_RECORD_LENGTH);
+
+    QModbusBits controlCommandBit(HEATER_CONTROL_REGISTER_BASE * 8, 1);
+
+    QDate date;
+    QTime time;
 
     int serverCommand = 0, cmd = 0;
 
@@ -90,11 +101,10 @@ void CHeaterClientServer::run()
                     modbusErr = pModbusMaster->lastError();
                     if(modbusErr.isValid()) {pHeaterInfoPreview->networkStatus = NETWORK_OFFLINE;continue;}
                     else {pHeaterInfoPreview->networkStatus = NETWORK_ONLINE;}
-                    pModbusMaster->readInputRegisters(averageTemperatureRegister);
-                    pModbusMaster->readInputRegisters(faultStatusRegister);
-                    pHeaterInfoPreview->averageTemperature = averageTemperatureRegister.getInteger16(0);
-                    for(int i = 0; i < HEATER_FAULT_STATUS_LENGTH; i ++){
-                        if(faultStatusRegister.getUInteger16(i)){pHeaterInfoPreview->faultStatus = true;continue;}
+                    pModbusMaster->readInputRegisters(infoPreviewRegisters);
+                    pHeaterInfoPreview->averageTemperature = infoPreviewRegisters.getInteger16(0);
+                    for(int i = (HEATER_FAULT_STATUS_BASE - HEATER_UNIT_AVERAGE_TEMP_ADDR); i < HEATER_FAULT_STATUS_LENGTH + (HEATER_FAULT_STATUS_BASE - HEATER_UNIT_AVERAGE_TEMP_ADDR); i ++){
+                        if(infoPreviewRegisters.getUInteger16(i)){pHeaterInfoPreview->faultStatus = true;break;}
                         else {pHeaterInfoPreview->faultStatus = false;}
                     }
 
@@ -131,7 +141,6 @@ void CHeaterClientServer::run()
                     for(int i = 0; i < HEATER_QUANITY_NUM; i ++){
                         remoteControlRegisters.setAddress(HEATER_WORK_SWITCH_ADDR + HEATER_MODBUS_OFFSET_ADDR * i);
                         remoteControlRegisters.setInteger16(0, pRealTimeDataRemoterControlSyncToRemoteDevices->remoteControl[i]);
-                        //sleep(1);
                         pModbusMaster->writeRegisters(remoteControlRegisters);
                     }
                     clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
@@ -196,6 +205,13 @@ void CHeaterClientServer::run()
                     clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
                     clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
 
+                    break;
+            case ParameterSettingResetCmd:
+                    controlCommandBit.setAddress((HEATER_CONTROL_REGISTER_BASE * 16) + HEATER_PARAMETER_SETTINGS_RESET_OFFSET);
+                    controlCommandBit.setValue(0, 1);
+                    pModbusMaster->writeBit(controlCommandBit);
+                    clientServerCommandHistory.currentCommand = ParameterSettingReadCmd;
+                    clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
                     break;
             case FaultInfoReadCmd:
                     pModbusMaster->readInputRegisters(faultInfoRegisters);
@@ -269,6 +285,32 @@ void CHeaterClientServer::run()
                     clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
                     clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
 
+                    break;
+            case HistoryRecordFaultClearCmd:
+                    controlCommandBit.setAddress((HEATER_CONTROL_REGISTER_BASE * 16) + HEATER_FAULT_RECORD_CLEAR_OFFSET);
+                    controlCommandBit.setValue(0, 1);
+                    pModbusMaster->writeBit(controlCommandBit);
+                    clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
+                    clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
+                    break;
+            case HistoryRecordWorkClearCmd:
+                    controlCommandBit.setAddress((HEATER_CONTROL_REGISTER_BASE * 16) + HEATER_WORK_RECORD_CLEAR_OFFSET);
+                    controlCommandBit.setValue(0, 1);
+                    pModbusMaster->writeBit(controlCommandBit);
+                    clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
+                    clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
+                    break;
+            case SystimeTimeCalibrationCmd:
+                    date = QDate::currentDate();
+                    time = QTime::currentTime();
+                    systemTimeRegisters.setUInteger16(0, date.year());
+                    systemTimeRegisters.setUInteger16(1, date.month());
+                    systemTimeRegisters.setUInteger16(2, date.day());
+                    systemTimeRegisters.setUInteger16(3, time.hour());
+                    systemTimeRegisters.setUInteger16(4, time.minute());
+                    pModbusMaster->writeRegisters(systemTimeRegisters);
+                    clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
+                    clientServerCommandHistory.lastCommand = MainFormReadCmd;
                     break;
             default:
                     break;

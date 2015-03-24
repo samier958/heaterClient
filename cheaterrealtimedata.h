@@ -47,7 +47,7 @@ public slots:
     void showHeaterRealTimeDataTemp();
     void showHeaterRealTimeDataRemoteControl();
 private slots:
-    void on_heaterGroupSwith_currentIndexChanged(int index);
+    //void on_heaterGroupSwith_currentIndexChanged(int index);
 
     void on_apply_released();
 

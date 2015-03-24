@@ -102,6 +102,11 @@ public:
         tr(":"),
         tr(" ")
     };
+    const QString portString[3] = {
+        tr("无输出"),
+        tr("有输出"),
+        tr("其它")
+    };
 
     explicit CHeaterHistoryRecord(QWidget *parent = 0);
     ~CHeaterHistoryRecord();
@@ -123,6 +128,10 @@ private slots:
     void on_cancle_released();
 
     void on_hearterFixedTimeIndex_currentIndexChanged(int index);
+
+    void on_clearWorkRecord_released();
+
+    void on_clearFaultRecord_released();
 
 private:
     Ui::CHeaterHistoryRecord *ui;

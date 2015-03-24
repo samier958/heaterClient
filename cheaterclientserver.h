@@ -34,9 +34,13 @@ public:
         RealTimeDataRemoteControlWriteCmd,
         ParameterSettingReadCmd,
         ParameterSettingWriteCmd,
+        ParameterSettingResetCmd,
         FaultInfoReadCmd,
         HistoryRecordFixedTimeCmd,
         HistoryRecordWorkOrFaultCmd,
+        HistoryRecordFaultClearCmd,
+        HistoryRecordWorkClearCmd,
+        SystimeTimeCalibrationCmd,
         ClientServerCmd_End
     };
 

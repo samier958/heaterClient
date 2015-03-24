@@ -13,8 +13,11 @@ CHeaterParameterSettings::CHeaterParameterSettings(QWidget *parent) :
 {
     ui->setupUi(this);
     m_groupSwith = 0;
+    memset(&(heaterParameterSetting[0]), 0, sizeof(heaterParameterSetting[0]));
+    memset(&(parameterSettingSyncToRemoteDevices[0]), 0, sizeof(parameterSettingSyncToRemoteDevices[0]));
     heaterParameterSetting[0].heaterIndex = 0;
     heaterParameterSetting[1].heaterIndex = 0;
+    showHeaterParameterSettings();
 }
 
 CHeaterParameterSettings::~CHeaterParameterSettings()
@@ -52,6 +55,18 @@ void CHeaterParameterSettings::showHeaterParameterSettings()
 }
 void CHeaterParameterSettings::on_heaterSwitch_currentIndexChanged(int index)
 {
+    ui->autoHeating->setChecked(false);
+    ui->autoHeatingStartTemp->clear();
+    ui->autoHeatingStopTemp->clear();
+    ui->autoRadiating->setChecked(false);
+    ui->autoRadiatingStartTemp->clear();
+    ui->autoRadiatingStopTemp->clear();
+    ui->debugTerminateTimer->clear();
+    ui->PTCDelayStart->clear();
+    ui->FANDelayStop->clear();
+    ui->startInterval->clear();
+    ui->minimumDowntime->clear();
+    ui->PT100TempSensorOffset->clear();
     heaterParameterSetting[m_groupSwith].heaterIndex = index;
     emit sendClientServerCommand(CHeaterClientServer::ParameterSettingReadCmd);
 }
@@ -128,4 +143,9 @@ void CHeaterParameterSettings::on_cancle_pressed()
 {
     //emit sendClientServerCommand(CHeaterClientServer::ParameterSettingReadCmd);
     showHeaterParameterSettings();
+}
+
+void CHeaterParameterSettings::on_reset_pressed()
+{
+    emit sendClientServerCommand(CHeaterClientServer::ParameterSettingResetCmd);
 }

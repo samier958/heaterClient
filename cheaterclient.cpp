@@ -13,17 +13,25 @@
 
 #include <QDebug>
 
+#include <QStandardPaths>
+#include <QFile>
+
 CHeaterClient::CHeaterClient(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CHeaterClient)
 {
     ui->setupUi(this);
+
+
+    m_clientConfigFile = /*QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + '/' +*/ CLIENT_CONFIG_FILE;
+    loadClientConfig();
+
     for(int i = 0; i < FAN_TOWER_GROUP; i ++) {
         heaterInfoPreview[i].networkStatus = false;
         heaterInfoPreview[i].averageTemperature = 0;
         heaterInfoPreview[i].faultStatus = false;
     }
-
+    showHeaterInfoPreview();
     pStackedWidget = ui->sessionStackContainer;
     pHeaterMainForm = new CHeaterMainForm(this);
     pStackedWidget->insertWidget(MainForm, pHeaterMainForm);
@@ -50,7 +58,8 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
     pStackedWidget->setCurrentIndex(MainForm);
     connect(ui->functionSwitchButtonGroup, SIGNAL(buttonReleased(int)), this, SLOT(functionSwitchButtonGroupStatusChanged(int)));
 
-    pHeaterClientServer[0] = new CHeaterClientServer("192.168.1.111");
+    //pHeaterClientServer[0] = new CHeaterClientServer("192.168.1.111");
+    pHeaterClientServer[0] = new CHeaterClientServer(m_ipAddr);
     pHeaterClientServer[0]->setHeaterInfoPreview(&(this->heaterInfoPreview[0]));
     pHeaterClientServer[0]->setHeaterRealTimeDataTemp(&(pHeaterRealTimeData->heaterRealTimeDataTemp[0]));
     pHeaterClientServer[0]->setHeaterRealTimeDataRemoteControl(&(pHeaterRealTimeData->heaterRealTimeDataRemoterControl[0]));
@@ -66,6 +75,7 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
     connect(pHeaterClientServer[0], SIGNAL(clientServerCommandComplete(int)), this, SLOT(showHeaterClientCommandComplete(int)));
     connect(this, SIGNAL(sendClientServerCommand(int)), pHeaterClientServer[0], SLOT(clientServerCommandExecute(int)));
 
+    emit sendClientServerCommand(CHeaterClientServer::SystimeTimeCalibrationCmd);
 }
 
 CHeaterClient::~CHeaterClient()
@@ -99,37 +109,37 @@ void CHeaterClient::showHeaterClientCommandComplete(int cmd)
 {
     qDebug()<<"Client Show Form:"<<cmd;
     switch (cmd) {
-    case CHeaterClientServer::InfoPreviewReadCmd:
-         this->showHeaterInfoPreview();
-         break;
-    case CHeaterClientServer::MainFormReadCmd:
-         break;
-    case CHeaterClientServer::RealTimeDataTempReadCmd:
-         pHeaterRealTimeData->showHeaterRealTimeDataTemp();
-         break;
-    case CHeaterClientServer::RealTimeDataRemoteControlReadCmd:
-         pHeaterRealTimeData->showHeaterRealTimeDataRemoteControl();
-         break;
-    case CHeaterClientServer::RealTimeDataRemoteControlWriteCmd:
-         qDebug()<<"Real Time Data Remote Control Write Complete.";
-         break;
-    case CHeaterClientServer::ParameterSettingReadCmd:
-         pHeaterParameterSettings->showHeaterParameterSettings();
-         break;
-    case CHeaterClientServer::ParameterSettingWriteCmd:
-         qDebug()<<"Parameter Setting Write Complete.";
-         break;
-    case CHeaterClientServer::FaultInfoReadCmd:
-         pHeaterFaultInfo->showHeaterFaultInfo();
-         break;
-    case CHeaterClientServer::HistoryRecordFixedTimeCmd:
-         pHeaterHistoryRecord->showHeaterHistoryRecordFixedTime();
-         break;
-    case CHeaterClientServer::HistoryRecordWorkOrFaultCmd:
-         pHeaterHistoryRecord->showHeaterHistoryRecordWorkOrFault();
-         break;
-    default:
-         break;
+        case CHeaterClientServer::InfoPreviewReadCmd:
+             this->showHeaterInfoPreview();
+             break;
+        case CHeaterClientServer::MainFormReadCmd:
+             break;
+        case CHeaterClientServer::RealTimeDataTempReadCmd:
+             pHeaterRealTimeData->showHeaterRealTimeDataTemp();
+             break;
+        case CHeaterClientServer::RealTimeDataRemoteControlReadCmd:
+             pHeaterRealTimeData->showHeaterRealTimeDataRemoteControl();
+             break;
+        case CHeaterClientServer::RealTimeDataRemoteControlWriteCmd:
+             qDebug()<<"Real Time Data Remote Control Write Complete.";
+             break;
+        case CHeaterClientServer::ParameterSettingReadCmd:
+             pHeaterParameterSettings->showHeaterParameterSettings();
+             break;
+        case CHeaterClientServer::ParameterSettingWriteCmd:
+             qDebug()<<"Parameter Setting Write Complete.";
+             break;
+        case CHeaterClientServer::FaultInfoReadCmd:
+             pHeaterFaultInfo->showHeaterFaultInfo();
+             break;
+        case CHeaterClientServer::HistoryRecordFixedTimeCmd:
+             pHeaterHistoryRecord->showHeaterHistoryRecordFixedTime();
+             break;
+        case CHeaterClientServer::HistoryRecordWorkOrFaultCmd:
+             pHeaterHistoryRecord->showHeaterHistoryRecordWorkOrFault();
+             break;
+        default:
+             break;
     }
 }
 
@@ -137,21 +147,37 @@ void CHeaterClient::showHeaterInfoPreview()
 {
     if(heaterInfoPreview[0].networkStatus) {ui->networkStatus_0->setText(networkStatusString[0]);}
     else {ui->networkStatus_0->setText(networkStatusString[1]);}
-    if(heaterInfoPreview[1].networkStatus) {ui->networkStatus_1->setText(networkStatusString[0]);}
-    else {ui->networkStatus_1->setText(networkStatusString[1]);}
+    //if(heaterInfoPreview[1].networkStatus) {ui->networkStatus_1->setText(networkStatusString[0]);}
+    //else {ui->networkStatus_1->setText(networkStatusString[1]);}
 
     QString tempString;
     tempString = QString::number(((double)(heaterInfoPreview[0].averageTemperature)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
     ui->averageTemperature_0->setText(tempString);
-    tempString = QString::number(((double)(heaterInfoPreview[1].averageTemperature)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
-    ui->averageTemperature_1->setText(tempString);
+    //tempString = QString::number(((double)(heaterInfoPreview[1].averageTemperature)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
+    //ui->averageTemperature_1->setText(tempString);
 
-    if(heaterInfoPreview[0].faultStatus) {ui->faultStatus_0->setText(faultStatusString[0]);}
+    if(!(heaterInfoPreview[0].faultStatus)) {ui->faultStatus_0->setText(faultStatusString[0]);}
     else {ui->faultStatus_0->setText(faultStatusString[1]);}
-    if(heaterInfoPreview[1].faultStatus) {ui->faultStatus_1->setText(faultStatusString[0]);}
-    else {ui->faultStatus_1->setText(faultStatusString[1]);}
+    //if(heaterInfoPreview[1].faultStatus) {ui->faultStatus_1->setText(faultStatusString[0]);}
+    //else {ui->faultStatus_1->setText(faultStatusString[1]);}
 }
 
+
+void CHeaterClient::loadClientConfig()
+{
+    QFile clientConfigFile(m_clientConfigFile);
+    if (!clientConfigFile.open(QIODevice::ReadOnly | QIODevice::Text)) { m_ipAddr = LOOP_LOCAL_ADDR; return; }
+
+    QTextStream in(&clientConfigFile);
+      while (!in.atEnd()) {
+          QString configLine = in.readLine();
+          if(configLine.isEmpty() || '#' == configLine[0] || '$' == configLine[0]) { continue; }
+          QStringList configList = configLine.split('=');
+          if(configList.at(0) == "IP_Addr_1") {m_ipAddr = configList.at(1);}
+      }
+      if(m_ipAddr.isEmpty()){m_ipAddr = LOOP_LOCAL_ADDR;}
+      qDebug()<<"IP Addr:"<<m_ipAddr;
+}
 
 
 
