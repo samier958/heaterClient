@@ -36,9 +36,8 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
     pHeaterMainForm = new CHeaterMainForm(this);
     pStackedWidget->insertWidget(MainForm, pHeaterMainForm);
 
-    //connect(pHeaterMainForm, SIGNAL(establishNetworkConnection()), this, SLOT(establishNetworkConnectionHub()));
-    //connect(pHeaterMainForm, SIGNAL(disconnectNetwork()), this, SLOT(disconnectNetworkHub()));
-    //connect(this, SIGNAL(updateControlForm(int)), pHeaterMainForm, SLOT(reflashHeaterControlForm(int)));
+    connect(pHeaterMainForm, SIGNAL(establishNetworkConnection()), this, SLOT(establishNetworkConnectionHub()));
+    connect(pHeaterMainForm, SIGNAL(disconnectNetwork()), this, SLOT(disconnectNetworkHub()));
 
     pHeaterRealTimeData = new CHeaterRealTimeData(this);
     pStackedWidget->insertWidget(RealTimeData, pHeaterRealTimeData);
@@ -74,6 +73,9 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
 
     connect(pHeaterClientServer[0], SIGNAL(clientServerCommandComplete(int)), this, SLOT(showHeaterClientCommandComplete(int)));
     connect(this, SIGNAL(sendClientServerCommand(int)), pHeaterClientServer[0], SLOT(clientServerCommandExecute(int)));
+
+    setFixedSize(800, 600);
+    setWindowTitle("加热器远程控制系统");
 
     emit sendClientServerCommand(CHeaterClientServer::SystimeTimeCalibrationCmd);
 }
@@ -180,4 +182,12 @@ void CHeaterClient::loadClientConfig()
 }
 
 
+void CHeaterClient::establishNetworkConnectionHub()
+{
+    heaterInfoPreview[0].allowed = true;
+}
+void CHeaterClient::disconnectNetworkHub()
+{
+    heaterInfoPreview[0].allowed = false;
+}
 

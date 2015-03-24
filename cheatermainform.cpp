@@ -16,25 +16,3 @@ CHeaterMainForm::~CHeaterMainForm()
 {
     delete ui;
 }
-
-void CHeaterMainForm::updateHeaterSystemTime()
-{
-    /*
-    QModbusRegisters systemTimeRegisters(HEATER_UNIT_SYSTEM_TIME_BASE, HEATER_UNIT_SYSTEM_TIME_LENGTH);
-    pModbusMaster->connect();
-    pModbusMaster->readInputRegisters(systemTimeRegisters);
-    pModbusMaster->close();
-    for(int i = 0; i < HEATER_UNIT_SYSTEM_TIME_LENGTH; i ++){m_time[i] = systemTimeRegisters.getInteger16(i);}
-    showHeaterSystemTime();
-    */
-}
-void CHeaterMainForm::showHeaterSystemTime()
-{
-    /*
-    QString timeString;
-    for(int i = 0; i < HEATER_UNIT_SYSTEM_TIME_LENGTH; i ++){
-        timeString += ((m_time[i] < 10)?"0":"") + QString::number(m_time[i]) + systemTimeString[i];
-    }
-    ui->systemTime->setText(timeString);
-    */
-}

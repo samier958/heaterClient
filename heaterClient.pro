@@ -56,3 +56,6 @@ FORMS += \
 CONFIG += warn_off
 
 RC_FILE = logo.rc
+
+RESOURCES += \
+    res.qrc

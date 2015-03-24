@@ -93,35 +93,35 @@
       <item>
        <widget class="QLabel" name="faultInfo_1">
         <property name="text">
-         <string>TextLabel</string>
+         <string>无故障</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="faultInfo_2">
         <property name="text">
-         <string>TextLabel</string>
+         <string>无故障</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="faultInfo_3">
         <property name="text">
-         <string>TextLabel</string>
+         <string>无故障</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="faultInfo_4">
         <property name="text">
-         <string>TextLabel</string>
+         <string>无故障</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="faultInfo_5">
         <property name="text">
-         <string>TextLabel</string>
+         <string>无故障</string>
         </property>
        </widget>
       </item>

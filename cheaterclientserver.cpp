@@ -90,6 +90,15 @@ void CHeaterClientServer::run()
     uint controlFunctionSetting = 0;
 
     do{
+        qDebug()<<"Heater Connection Allowed:"<<pHeaterInfoPreview->allowed;
+        if(!(pHeaterInfoPreview->allowed)){
+            pHeaterInfoPreview->networkStatus = NETWORK_OFFLINE;
+            pHeaterInfoPreview->averageTemperature = 0;
+            pHeaterInfoPreview->faultStatus = true;
+            emit clientServerCommandComplete(InfoPreviewReadCmd);
+            sleep(1);
+            continue;
+        }
         //child form
         cmd = clientServerCommandHistory.currentCommand;
         qDebug()<<"Client Server Cmd:"<<cmd;

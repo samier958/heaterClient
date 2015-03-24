@@ -51,6 +51,7 @@ public:
         tr("其它")
     };
     typedef struct _heater_info_preview{
+        bool allowed;
         bool networkStatus;
         int averageTemperature;
         bool faultStatus;
@@ -68,6 +69,8 @@ signals:
 private slots:
     void functionSwitchButtonGroupStatusChanged(int id);
     void showHeaterClientCommandComplete(int cmd);
+    void establishNetworkConnectionHub();
+    void disconnectNetworkHub();
     
 private:
 
