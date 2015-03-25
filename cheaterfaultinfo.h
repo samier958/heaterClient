@@ -19,13 +19,13 @@ class CHeaterFaultInfo : public QWidget
     
 public:
     const QString faultInfoString[8] = {
-        tr("PT100故障"),
-        tr("温度异常"),
-        tr("风机过载"),
-        tr("PTC无电"),
-        tr("干烧故障"),
-        tr("设定错误"),
-        tr("无故障"),
+        tr("PT100温度传感器连接故障"),
+        tr("温度检测异常警告"),
+        tr("风机断路器过载跳闸"),
+        tr("PTC断路器过载跳闸"),
+        tr("PTC表面温度超高警告"),
+        tr("启停温度设定错误"),
+        tr("设备正常"),
         tr("未知")
     };
     typedef struct _heater_fault_info{

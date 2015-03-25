@@ -9,6 +9,8 @@
 #include <QDate>
 #include <QDateTime>
 
+#include <QDebug>
+
 CHeaterHistoryRecord::CHeaterHistoryRecord(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CHeaterHistoryRecord)
@@ -19,6 +21,10 @@ CHeaterHistoryRecord::CHeaterHistoryRecord(QWidget *parent) :
     heaterHistoryRecordFixedTime[0].valid = 1;
     heaterHistoryRecordFixedTime[0].wait = 0;
     heaterHistoryRecordFixedTime[0].index = 0;
+
+    pGreenCirclePixmap = new QPixmap(":/res/res/greenCircle.png");
+    pRedCirclePixmap = new QPixmap(":/res/res/redCircle.png");
+
     showHeaterHistoryRecordWorkOrFault();
 }
 
@@ -43,17 +49,17 @@ void CHeaterHistoryRecord::showHeaterHistoryRecordFixedTime()
         if(!(heaterHistoryRecordFixedTime[0].faultInfo)){ui->faultInfo->setText(faultInfoString[6]);break;}
         if((heaterHistoryRecordFixedTime[0].faultInfo) & (1 << i)){ui->faultInfo->setText(faultInfoString[i]);}
     }
-    if((heaterHistoryRecordFixedTime[0].inputPort & 0x0001)){ui->fanPowerPort->setText(portString[0]);}
-    else {ui->fanPowerPort->setText(portString[1]);}
-    if((heaterHistoryRecordFixedTime[0].inputPort & 0x0002)){ui->ptcPowerPort->setText(portString[0]);}
-    else {ui->ptcPowerPort->setText(portString[1]);}
-    if((heaterHistoryRecordFixedTime[0].inputPort & 0x0003)){ui->externalBurdenPort->setText(portString[0]);}
-    else {ui->externalBurdenPort->setText(portString[1]);}
+    if((heaterHistoryRecordFixedTime[0].inputPort & 0x0001)){ui->fanPowerPort->setPixmap(*pGreenCirclePixmap);}
+    else {ui->fanPowerPort->setPixmap(*pRedCirclePixmap);}
+    if((heaterHistoryRecordFixedTime[0].inputPort & 0x0002)){ui->ptcPowerPort->setPixmap(*pGreenCirclePixmap);}
+    else {ui->ptcPowerPort->setPixmap(*pRedCirclePixmap);}
+    if((heaterHistoryRecordFixedTime[0].inputPort & 0x0003)){ui->externalBurdenPort->setPixmap(*pGreenCirclePixmap);}
+    else {ui->externalBurdenPort->setPixmap(*pRedCirclePixmap);}
 
-    if((heaterHistoryRecordFixedTime[0].outputPort & 0x0001)){ui->heatingPort->setText(portString[0]);}
-    else {ui->heatingPort->setText(portString[1]);}
-    if((heaterHistoryRecordFixedTime[0].outputPort & 0x0002)){ui->radiatingPort->setText(portString[0]);}
-    else {ui->radiatingPort->setText(portString[1]);}
+    if((heaterHistoryRecordFixedTime[0].outputPort & 0x0001)){ui->heatingPort->setPixmap(*pGreenCirclePixmap);}
+    else {ui->heatingPort->setPixmap(*pRedCirclePixmap);}
+    if((heaterHistoryRecordFixedTime[0].outputPort & 0x0002)){ui->radiatingPort->setPixmap(*pGreenCirclePixmap);}
+    else {ui->radiatingPort->setPixmap(*pRedCirclePixmap);}
 }
 void CHeaterHistoryRecord::showHeaterHistoryRecordWorkOrFault()
 {
@@ -86,7 +92,7 @@ void CHeaterHistoryRecord::showHeaterHistoryRecordWorkOrFault()
         }else if(heaterHistoryRecordWorkOrFault[0].workRecord[i].code >= 110 && heaterHistoryRecordWorkOrFault[0].workRecord[i].code <= 158){
             int index = heaterHistoryRecordWorkOrFault[0].workRecord[i].code / 10 - 10;
             int code = heaterHistoryRecordWorkOrFault[0].workRecord[i].code % 10;
-            m_workRecord[i] += QString::number(index) + workOrFaultRecordString[5 + code];
+            m_workRecord[i] += QString::number(index) + workOrFaultRecordString[10 + code];
         }else{
 
         }

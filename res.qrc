@@ -1,5 +1,7 @@
 <RCC>
-    <qresource prefix="/logo">
-        <file>dyzkLogo.png</file>
+    <qresource prefix="/res">
+        <file>res/dyzkLogo.png</file>
+        <file>res/greenCircle.png</file>
+        <file>res/redCircle.png</file>
     </qresource>
 </RCC>

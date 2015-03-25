@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>538</width>
-    <height>421</height>
+    <width>570</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,11 +16,17 @@
   <widget class="QLabel" name="label_11">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>30</y>
-     <width>131</width>
-     <height>16</height>
+     <x>59</x>
+     <y>60</y>
+     <width>161</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>当前加热器故障信息</string>
@@ -29,8 +35,8 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>31</x>
-     <y>60</y>
+     <x>60</x>
+     <y>100</y>
      <width>461</width>
      <height>311</height>
     </rect>
@@ -40,6 +46,12 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>宋体</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>#1加热器故障：</string>
         </property>
@@ -47,6 +59,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <family>宋体</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>#2加热器故障：</string>
         </property>
@@ -54,6 +72,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <family>宋体</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>#3加热器故障：</string>
         </property>
@@ -61,6 +85,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <family>宋体</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>#4加热器故障：</string>
         </property>
@@ -68,6 +98,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_5">
+        <property name="font">
+         <font>
+          <family>宋体</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>#5加热器故障：</string>
         </property>
@@ -92,36 +128,66 @@
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QLabel" name="faultInfo_1">
+        <property name="font">
+         <font>
+          <family>AcadEref</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>无故障</string>
+         <string>设备正常</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="faultInfo_2">
+        <property name="font">
+         <font>
+          <family>AcadEref</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>无故障</string>
+         <string>设备正常</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="faultInfo_3">
+        <property name="font">
+         <font>
+          <family>AcadEref</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>无故障</string>
+         <string>设备正常</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="faultInfo_4">
+        <property name="font">
+         <font>
+          <family>AcadEref</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>无故障</string>
+         <string>设备正常</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="faultInfo_5">
+        <property name="font">
+         <font>
+          <family>AcadEref</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>无故障</string>
+         <string>设备正常</string>
         </property>
        </widget>
       </item>

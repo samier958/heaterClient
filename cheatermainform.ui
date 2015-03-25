@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>588</width>
-    <height>411</height>
+    <width>570</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,11 +16,19 @@
   <widget class="QPushButton" name="connect">
    <property name="geometry">
     <rect>
-     <x>163</x>
+     <x>150</x>
      <y>330</y>
-     <width>75</width>
-     <height>23</height>
+     <width>80</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>11</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="text">
     <string>联机</string>
@@ -29,11 +37,19 @@
   <widget class="QPushButton" name="disconnect">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>340</x>
      <y>330</y>
-     <width>75</width>
-     <height>23</height>
+     <width>80</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>11</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="text">
     <string>断开</string>

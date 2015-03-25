@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>561</width>
-    <height>489</height>
+    <width>570</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,15 @@
     <rect>
      <x>40</x>
      <y>70</y>
-     <width>461</width>
-     <height>311</height>
+     <width>501</width>
+     <height>301</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="currentIndex">
     <number>0</number>
@@ -32,9 +38,9 @@
     <widget class="QGroupBox" name="groupBox">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>30</x>
        <y>40</y>
-       <width>181</width>
+       <width>201</width>
        <height>201</height>
       </rect>
      </property>
@@ -45,13 +51,13 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>40</y>
-        <width>101</width>
-        <height>16</height>
+        <y>30</y>
+        <width>150</width>
+        <height>25</height>
        </rect>
       </property>
       <property name="text">
-       <string>启用自动加热</string>
+       <string>自动温控加热功能</string>
       </property>
      </widget>
      <widget class="QWidget" name="layoutWidget">
@@ -59,7 +65,7 @@
        <rect>
         <x>20</x>
         <y>80</y>
-        <width>141</width>
+        <width>148</width>
         <height>91</height>
        </rect>
       </property>
@@ -68,6 +74,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QLabel" name="label">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="text">
             <string>启动温度：</string>
            </property>
@@ -120,9 +129,9 @@
     <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>260</x>
        <y>40</y>
-       <width>191</width>
+       <width>201</width>
        <height>201</height>
       </rect>
      </property>
@@ -132,22 +141,22 @@
      <widget class="QCheckBox" name="autoRadiating">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>40</y>
-        <width>111</width>
-        <height>16</height>
+        <x>20</x>
+        <y>30</y>
+        <width>150</width>
+        <height>25</height>
        </rect>
       </property>
       <property name="text">
-       <string>启用自动散热</string>
+       <string>自动温控散热功能</string>
       </property>
      </widget>
      <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>20</x>
         <y>80</y>
-        <width>141</width>
+        <width>148</width>
         <height>91</height>
        </rect>
       </property>
@@ -156,6 +165,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QLabel" name="label_3">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="text">
             <string>启动温度：</string>
            </property>
@@ -213,10 +225,10 @@
     <widget class="QLabel" name="label_18">
      <property name="geometry">
       <rect>
-       <x>360</x>
-       <y>150</y>
-       <width>16</width>
-       <height>16</height>
+       <x>430</x>
+       <y>140</y>
+       <width>30</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -226,10 +238,10 @@
     <widget class="QLabel" name="label_19">
      <property name="geometry">
       <rect>
-       <x>360</x>
-       <y>190</y>
-       <width>16</width>
-       <height>16</height>
+       <x>430</x>
+       <y>180</y>
+       <width>30</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -239,10 +251,10 @@
     <widget class="QLabel" name="label_20">
      <property name="geometry">
       <rect>
-       <x>360</x>
-       <y>230</y>
-       <width>16</width>
-       <height>16</height>
+       <x>430</x>
+       <y>220</y>
+       <width>30</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -252,10 +264,10 @@
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>70</y>
-       <width>144</width>
-       <height>16</height>
+       <x>40</x>
+       <y>60</y>
+       <width>220</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -265,10 +277,10 @@
     <widget class="QLineEdit" name="PTCDelayStart">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>70</y>
-       <width>50</width>
-       <height>20</height>
+       <x>360</x>
+       <y>60</y>
+       <width>66</width>
+       <height>26</height>
       </rect>
      </property>
      <property name="alignment">
@@ -278,10 +290,10 @@
     <widget class="QLabel" name="label_16">
      <property name="geometry">
       <rect>
-       <x>360</x>
-       <y>70</y>
-       <width>16</width>
-       <height>16</height>
+       <x>430</x>
+       <y>60</y>
+       <width>30</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -291,10 +303,10 @@
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>110</y>
-       <width>144</width>
-       <height>16</height>
+       <x>40</x>
+       <y>100</y>
+       <width>220</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -304,10 +316,10 @@
     <widget class="QLineEdit" name="FANDelayStop">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>110</y>
-       <width>50</width>
-       <height>20</height>
+       <x>360</x>
+       <y>100</y>
+       <width>66</width>
+       <height>26</height>
       </rect>
      </property>
      <property name="alignment">
@@ -317,10 +329,10 @@
     <widget class="QLabel" name="label_17">
      <property name="geometry">
       <rect>
-       <x>360</x>
-       <y>110</y>
-       <width>16</width>
-       <height>16</height>
+       <x>430</x>
+       <y>100</y>
+       <width>30</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -330,10 +342,10 @@
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>30</y>
-       <width>160</width>
-       <height>16</height>
+       <x>40</x>
+       <y>20</y>
+       <width>220</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -343,10 +355,10 @@
     <widget class="QLineEdit" name="debugTerminateTimer">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>30</y>
-       <width>50</width>
-       <height>20</height>
+       <x>360</x>
+       <y>20</y>
+       <width>66</width>
+       <height>26</height>
       </rect>
      </property>
      <property name="alignment">
@@ -356,23 +368,23 @@
     <widget class="QLabel" name="label_15">
      <property name="geometry">
       <rect>
-       <x>360</x>
-       <y>30</y>
-       <width>16</width>
-       <height>16</height>
+       <x>430</x>
+       <y>20</y>
+       <width>30</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
-      <string>秒</string>
+      <string>分</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>150</y>
-       <width>100</width>
-       <height>16</height>
+       <x>40</x>
+       <y>140</y>
+       <width>220</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -382,10 +394,10 @@
     <widget class="QLineEdit" name="startInterval">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>150</y>
-       <width>50</width>
-       <height>20</height>
+       <x>360</x>
+       <y>140</y>
+       <width>66</width>
+       <height>26</height>
       </rect>
      </property>
      <property name="alignment">
@@ -395,10 +407,10 @@
     <widget class="QLabel" name="PT100TempSensorOffset_10">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>230</y>
-       <width>132</width>
-       <height>16</height>
+       <x>40</x>
+       <y>220</y>
+       <width>220</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -408,10 +420,10 @@
     <widget class="QLineEdit" name="PT100TempSensorOffset">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>230</y>
-       <width>50</width>
-       <height>20</height>
+       <x>360</x>
+       <y>220</y>
+       <width>66</width>
+       <height>26</height>
       </rect>
      </property>
      <property name="alignment">
@@ -421,10 +433,10 @@
     <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>190</y>
-       <width>78</width>
-       <height>16</height>
+       <x>40</x>
+       <y>180</y>
+       <width>220</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -434,10 +446,10 @@
     <widget class="QLineEdit" name="minimumDowntime">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>190</y>
-       <width>50</width>
-       <height>20</height>
+       <x>360</x>
+       <y>180</y>
+       <width>66</width>
+       <height>26</height>
       </rect>
      </property>
      <property name="alignment">
@@ -449,11 +461,17 @@
   <widget class="QPushButton" name="apply">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>410</y>
-     <width>75</width>
-     <height>23</height>
+     <x>350</x>
+     <y>390</y>
+     <width>80</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>应用</string>
@@ -462,11 +480,17 @@
   <widget class="QPushButton" name="cancle">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>410</y>
-     <width>75</width>
-     <height>23</height>
+     <x>460</x>
+     <y>390</y>
+     <width>80</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>取消</string>
@@ -475,15 +499,21 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>40</x>
      <y>20</y>
      <width>321</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_12">
     <item>
      <widget class="QLabel" name="label_10">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>加热器选择：</string>
       </property>
@@ -504,29 +534,35 @@
     </item>
     <item>
      <widget class="QComboBox" name="heaterSwitch">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <item>
        <property name="text">
-        <string>#1加热器</string>
+        <string> #1加热器 </string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>#2加热器</string>
+        <string> #2加热器 </string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>#3加热器</string>
+        <string> #3加热器 </string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>#4加热器</string>
+        <string> #4加热器 </string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>#5加热器</string>
+        <string> #5加热器 </string>
        </property>
       </item>
      </widget>
@@ -536,11 +572,17 @@
   <widget class="QPushButton" name="reset">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>410</y>
-     <width>75</width>
-     <height>23</height>
+     <x>40</x>
+     <y>390</y>
+     <width>91</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>恢复默认值</string>

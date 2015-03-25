@@ -40,8 +40,9 @@ void CHeaterParameterSettings::showHeaterParameterSettings()
     tempString = QString::number(((double)(heaterParameterSetting[m_groupSwith].autoRadiatingStopTemp)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
     ui->autoRadiatingStopTemp->setText(tempString);
 
-    tempString = QString::number(((double)(heaterParameterSetting[m_groupSwith].debugTerminateTimer)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
+    tempString = QString::number(((heaterParameterSetting[m_groupSwith].debugTerminateTimer)));
     ui->debugTerminateTimer->setText(tempString);
+
     tempString = QString::number(((double)(heaterParameterSetting[m_groupSwith].PTCDelayStart)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
     ui->PTCDelayStart->setText(tempString);
     tempString = QString::number(((double)(heaterParameterSetting[m_groupSwith].FANDelayStop)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
@@ -83,11 +84,13 @@ void CHeaterParameterSettings::on_apply_released()
 
     autoHeatingStartTempString = ui->autoHeatingStartTemp->text();
     tmp = autoHeatingStartTempString.toFloat(&ok) * 10.0;
+    if(tmp < -400){tmp = -400;}if(tmp > 200){tmp = 200;}
     value = static_cast<int>(tmp);
     parameterSettingSyncToRemoteDevices[m_groupSwith].autoHeatingStartTemp = value;
 
     autoHeatingStopTempSting = ui->autoHeatingStopTemp->text();
     tmp = autoHeatingStopTempSting.toFloat(&ok) * 10.0;
+    if(tmp < -300){tmp = -300;}if(tmp > 300){tmp = 300;}
     value = static_cast<int>(tmp);
     parameterSettingSyncToRemoteDevices[m_groupSwith].autoHeatingStopTemp = value;
 
@@ -96,43 +99,49 @@ void CHeaterParameterSettings::on_apply_released()
 
     autoRadiatingStartTempString = ui->autoRadiatingStartTemp->text();
     tmp = autoRadiatingStartTempString.toFloat(&ok) * 10.0;
+    if(tmp < 350){tmp = 350;}if(tmp > 600){tmp = 600;}
     value = static_cast<int>(tmp);
     parameterSettingSyncToRemoteDevices[m_groupSwith].autoRadiatingStartTemp = value;
 
     autoRadiatingStopTempString = ui->autoRadiatingStopTemp->text();
     tmp = autoRadiatingStopTempString.toFloat(&ok) * 10.0;
+    if(tmp < 300){tmp = 300;}if(tmp > 550){tmp = 550;}
     value = static_cast<int>(tmp);
     parameterSettingSyncToRemoteDevices[m_groupSwith].autoRadiatingStopTemp = value;
 
-    //left settings
+    //Advanced Settings
     debugTerminateTimerString = ui->debugTerminateTimer->text();
-    tmp = debugTerminateTimerString.toFloat(&ok) * 10.0;
-    value = static_cast<int>(tmp);
+    value = debugTerminateTimerString.toInt(&ok);
+    if(value < 1){value = 1;}if(value > 300){value = 300;}
     parameterSettingSyncToRemoteDevices[m_groupSwith].debugTerminateTimer = value;
 
     PTCDelayStartString = ui->PTCDelayStart->text();
     tmp = PTCDelayStartString.toFloat(&ok) * 10.0;
+    if(tmp < 0){tmp = 0;}if(tmp > 1800){tmp = 1800;}
     value = static_cast<int>(tmp);
     parameterSettingSyncToRemoteDevices[m_groupSwith].PTCDelayStart = value;
 
     FANDelayStopString = ui->FANDelayStop->text();
     tmp = FANDelayStopString.toFloat(&ok) * 10.0;
+    if(tmp < 100){tmp = 100;}if(tmp > 1800){tmp = 1800;}
     value = static_cast<int>(tmp);
     parameterSettingSyncToRemoteDevices[m_groupSwith].FANDelayStop = value;
 
-    //right settings
     startIntervalString = ui->startInterval->text();
     tmp = startIntervalString.toFloat(&ok) * 10.0;
+    if(tmp < 50){tmp = 50;}if(tmp > 1800){tmp = 1800;}
     value = static_cast<int>(tmp);
     parameterSettingSyncToRemoteDevices[m_groupSwith].startInterval = value;
 
     minimumDowntimeString = ui->minimumDowntime->text();
     tmp = minimumDowntimeString.toFloat(&ok) * 10.0;
+    if(tmp < 100){tmp = 100;}if(tmp > 6000){tmp = 6000;}
     value = static_cast<int>(tmp);
     parameterSettingSyncToRemoteDevices[m_groupSwith].minimumDowntime = value;
 
     PT100TempSensorOffsetString = ui->PT100TempSensorOffset->text();
     tmp = PT100TempSensorOffsetString.toFloat(&ok) * 10.0;
+    if(tmp < -50){tmp = -50;}if(tmp > 50){tmp = 50;}
     value = static_cast<int>(tmp);
     parameterSettingSyncToRemoteDevices[m_groupSwith].PT100TempSensorOffset = value;
 

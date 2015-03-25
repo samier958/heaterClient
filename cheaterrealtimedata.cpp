@@ -46,8 +46,8 @@ void CHeaterRealTimeData::showHeaterRealTimeDataTemp()
     tempString = QString::number(((double)(heaterRealTimeDataTemp[m_groupSwith].temperatureSensor[4])) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
     ui->heaterTemp_5->setText(tempString);
 
-    tempString = QString::number(((double)(heaterRealTimeDataTemp[m_groupSwith].temperatureSensorBackup)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
-    ui->tempSensorBackup->setText(tempString);
+    //tempString = QString::number(((double)(heaterRealTimeDataTemp[m_groupSwith].temperatureSensorBackup)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
+    //ui->tempSensorBackup->setText(tempString);
 }
 
 void CHeaterRealTimeData::showHeaterRealTimeDataRemoteControl()

@@ -152,8 +152,12 @@ void CHeaterClientServer::run()
                         remoteControlRegisters.setInteger16(0, pRealTimeDataRemoterControlSyncToRemoteDevices->remoteControl[i]);
                         pModbusMaster->writeRegisters(remoteControlRegisters);
                     }
-                    clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
-                    clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
+                    //clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
+                    //clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
+                    //switch command execute
+                    serverCommand = clientServerCommandHistory.lastCommand;
+                    clientServerCommandHistory.lastCommand = clientServerCommandHistory.currentCommand;
+                    clientServerCommandHistory.currentCommand  = serverCommand;
                     break;
             case ParameterSettingReadCmd:
                     parameterSettingsRegisters.setAddress(HEATER_PARAMETER_SETTINGS_BASE + pHeaterParameterSettings->heaterIndex * HEATER_MODBUS_OFFSET_ADDR);
@@ -279,12 +283,12 @@ void CHeaterClientServer::run()
                         pHeaterHistoryRecordWorkOrFault->workRecord[i].min   = workRecordRegisters.getInteger16(4 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
                         pHeaterHistoryRecordWorkOrFault->workRecord[i].code  = workRecordRegisters.getInteger16(5 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
                         //fault record
-                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].year  = workRecordRegisters.getInteger16(0 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
-                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].month = workRecordRegisters.getInteger16(1 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
-                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].day   = workRecordRegisters.getInteger16(2 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
-                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].hour  = workRecordRegisters.getInteger16(3 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
-                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].min   = workRecordRegisters.getInteger16(4 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
-                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].code  = workRecordRegisters.getInteger16(5 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
+                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].year  = faultRecordRegisters.getInteger16(0 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
+                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].month = faultRecordRegisters.getInteger16(1 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
+                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].day   = faultRecordRegisters.getInteger16(2 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
+                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].hour  = faultRecordRegisters.getInteger16(3 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
+                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].min   = faultRecordRegisters.getInteger16(4 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
+                        pHeaterHistoryRecordWorkOrFault->faultRecord[i].code  = faultRecordRegisters.getInteger16(5 + (i * HEATER_WORK_OR_FAULT_HISTORY_RECORD_TIEM_LENGTH));
                     }
                     //switch command execute
                     /*serverCommand = clientServerCommandHistory.lastCommand;
