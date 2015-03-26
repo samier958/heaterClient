@@ -50,9 +50,9 @@ public:
 
     const QString controlModeString[5] = {
         tr("自动"),
-        tr("停止"),
-        tr("加热"),
-        tr("吹风"),
+        tr("手动"),
+        tr("远程"),
+        tr("网络"),
         tr("其它")
     };
     const QString runningStatusString[5] = {

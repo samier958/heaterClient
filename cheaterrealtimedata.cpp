@@ -16,6 +16,24 @@ CHeaterRealTimeData::CHeaterRealTimeData(QWidget *parent) :
     memset(&(heaterRealTimeDataRemoterControl[0]), 0, sizeof(heaterRealTimeDataRemoterControl[0]));
     memset(&(realTimeDataRemoterControlSyncToRemoteDevices[0]), 0, sizeof(realTimeDataRemoterControlSyncToRemoteDevices[0]));
 
+    pHeaterTemp[0] = ui->heaterTemp_1;
+    pHeaterTemp[1] = ui->heaterTemp_2;
+    pHeaterTemp[2] = ui->heaterTemp_3;
+    pHeaterTemp[3] = ui->heaterTemp_4;
+    pHeaterTemp[4] = ui->heaterTemp_5;
+
+    pControlMode[0] = ui->controlMode_1;
+    pControlMode[1] = ui->controlMode_2;
+    pControlMode[2] = ui->controlMode_3;
+    pControlMode[3] = ui->controlMode_4;
+    pControlMode[4] = ui->controlMode_5;
+
+    pRunningStatus[0] = ui->runningStatus_1;
+    pRunningStatus[1] = ui->runningStatus_2;
+    pRunningStatus[2] = ui->runningStatus_3;
+    pRunningStatus[3] = ui->runningStatus_4;
+    pRunningStatus[4] = ui->runningStatus_5;
+
     pWorkSwitchGroup[0] = ui->workSwitch_1;
     pWorkSwitchGroup[1] = ui->workSwitch_2;
     pWorkSwitchGroup[2] = ui->workSwitch_3;
@@ -35,16 +53,15 @@ CHeaterRealTimeData::~CHeaterRealTimeData()
 void CHeaterRealTimeData::showHeaterRealTimeDataTemp()
 {
     QString tempString;
-    tempString = QString::number(((double)(heaterRealTimeDataTemp[m_groupSwith].temperatureSensor[0])) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
-    ui->heaterTemp_1->setText(tempString);
-    tempString = QString::number(((double)(heaterRealTimeDataTemp[m_groupSwith].temperatureSensor[1])) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
-    ui->heaterTemp_2->setText(tempString);
-    tempString = QString::number(((double)(heaterRealTimeDataTemp[m_groupSwith].temperatureSensor[2])) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
-    ui->heaterTemp_3->setText(tempString);
-    tempString = QString::number(((double)(heaterRealTimeDataTemp[m_groupSwith].temperatureSensor[3])) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
-    ui->heaterTemp_4->setText(tempString);
-    tempString = QString::number(((double)(heaterRealTimeDataTemp[m_groupSwith].temperatureSensor[4])) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
-    ui->heaterTemp_5->setText(tempString);
+    for(int i = 0; i < 5; i ++){
+        tempString = QString::number(((double)(heaterRealTimeDataTemp[m_groupSwith].temperatureSensor[i])) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
+        pHeaterTemp[i]->setText(tempString);
+        if((heaterRealTimeDataTemp[m_groupSwith].controlMode[i] >=0) && (heaterRealTimeDataTemp[m_groupSwith].controlMode[i] <=3)){pControlMode[i]->setText(controlModeString[heaterRealTimeDataTemp[m_groupSwith].controlMode[i]]);}
+        else {pControlMode[i]->setText(controlModeString[4]);}
+        if((heaterRealTimeDataTemp[m_groupSwith].runningStatus[i] >=0) && (heaterRealTimeDataTemp[m_groupSwith].runningStatus[i] <=3)){pRunningStatus[i]->setText(runningStatusString[heaterRealTimeDataTemp[m_groupSwith].runningStatus[i]]);}
+        else {pRunningStatus[i]->setText(runningStatusString[4]);}
+        //qDebug()<<"i:"<<i<<"Control Mode:"<<heaterRealTimeDataTemp[m_groupSwith].controlMode[i]<<"Running Status:"<<heaterRealTimeDataTemp[m_groupSwith].runningStatus[i];
+    }
 
     //tempString = QString::number(((double)(heaterRealTimeDataTemp[m_groupSwith].temperatureSensorBackup)) / 10.0);if(!tempString.contains('.')){tempString += ".0";}
     //ui->tempSensorBackup->setText(tempString);

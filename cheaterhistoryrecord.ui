@@ -33,7 +33,7 @@
    </property>
    <widget class="QWidget" name="Tab_1">
     <attribute name="title">
-     <string>运行记录</string>
+     <string>历史记录</string>
     </attribute>
     <widget class="QTabWidget" name="tabWidget_2">
      <property name="geometry">
@@ -170,7 +170,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>输入端口</string>
+        <string>输入端口：</string>
        </property>
       </widget>
       <widget class="Line" name="line_4">
@@ -235,7 +235,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>输出端口</string>
+        <string>输出端口：</string>
        </property>
       </widget>
       <widget class="Line" name="line_5">
@@ -373,27 +373,27 @@
       <widget class="QLabel" name="label_47">
        <property name="geometry">
         <rect>
-         <x>120</x>
+         <x>110</x>
          <y>10</y>
-         <width>221</width>
+         <width>225</width>
          <height>25</height>
         </rect>
        </property>
        <property name="text">
-        <string>注： 绿色为正常，红色为异常</string>
+        <string>绿色为正常，红色为异常</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_48">
        <property name="geometry">
         <rect>
-         <x>120</x>
+         <x>110</x>
          <y>140</y>
-         <width>221</width>
+         <width>225</width>
          <height>25</height>
         </rect>
        </property>
        <property name="text">
-        <string>注： 红色为停止，绿色为运行</string>
+        <string>绿色为运行，红色为停止</string>
        </property>
       </widget>
      </widget>

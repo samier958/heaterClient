@@ -67,6 +67,7 @@ void CHeaterClientServer::run()
     QModbusRegisters infoPreviewRegisters(HEATER_UNIT_AVERAGE_TEMP_ADDR, HEATER_FAULT_STATUS_LENGTH + (HEATER_FAULT_STATUS_BASE - HEATER_UNIT_AVERAGE_TEMP_ADDR));
 
     QModbusRegisters temperatureSensorsRegisters(HEATER_TEMPERATURE_SENSOR_BASE, HEATER_TEMPERATURE_SENSOR_LENGTH);
+    QModbusRegisters controlModeAndRunningStatusRegisters(HEATER_CONTROL_MODE_AND_RUNNING_STATUS_BASE, HEATER_CONTROL_MODE_AND_RUNNING_STATUS_LENGTH);
     QModbusRegisters remoteControlRegisters(HEATER_WORK_SWITCH_ADDR, 1);
 
     QModbusRegisters parameterSettingsRegisters(HEATER_PARAMETER_SETTINGS_BASE, HEATER_PARAMETER_SETTINGS_LENGTH);
@@ -130,8 +131,16 @@ void CHeaterClientServer::run()
                     break;
             case RealTimeDataTempReadCmd:
                     pModbusMaster->readInputRegisters(temperatureSensorsRegisters);
-                    for(int i = 0; i < 5; i ++){pHeaterRealTimeDataTemp->temperatureSensor[i] = temperatureSensorsRegisters.getInteger16(i);}
-                    pHeaterRealTimeDataTemp->temperatureSensorBackup = temperatureSensorsRegisters.getInteger16(HEATER_TEMPERATURE_SENSOR_LENGTH - 1);
+                    for(int i = 0; i < 5; i ++){
+                        pHeaterRealTimeDataTemp->temperatureSensor[i] = temperatureSensorsRegisters.getInteger16(i);
+
+                        controlModeAndRunningStatusRegisters.setAddress(HEATER_CONTROL_MODE_AND_RUNNING_STATUS_BASE + i * HEATER_MODBUS_OFFSET_ADDR);
+                        pModbusMaster->readInputRegisters(controlModeAndRunningStatusRegisters);
+                        pHeaterRealTimeDataTemp->controlMode[i] = controlModeAndRunningStatusRegisters.getUInteger16(0);
+                        pHeaterRealTimeDataTemp->runningStatus[i] = controlModeAndRunningStatusRegisters.getUInteger16(1);
+                        //qDebug()<<"i:"<<i<<"Control Mode:"<<pHeaterRealTimeDataTemp->controlMode[i]<<"Running Status:"<<pHeaterRealTimeDataTemp->runningStatus[i];
+                    }
+                    //pHeaterRealTimeDataTemp->temperatureSensorBackup = temperatureSensorsRegisters.getInteger16(HEATER_TEMPERATURE_SENSOR_LENGTH - 1);
                     //switch command execute
                     serverCommand = clientServerCommandHistory.lastCommand;
                     clientServerCommandHistory.lastCommand = clientServerCommandHistory.currentCommand ;

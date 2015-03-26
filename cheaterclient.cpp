@@ -75,7 +75,7 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
     connect(this, SIGNAL(sendClientServerCommand(int)), pHeaterClientServer[0], SLOT(clientServerCommandExecute(int)));
 
     setFixedSize(800, 600);
-    setWindowTitle("加热器远程控制系统");
+    setWindowTitle("风电机舱加热远程控制系统    德阳智科电子");
 
     emit sendClientServerCommand(CHeaterClientServer::SystimeTimeCalibrationCmd);
 }

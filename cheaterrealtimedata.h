@@ -12,6 +12,7 @@ namespace Ui {
 class CHeaterRealTimeData;
 }
 
+class QLabel;
 class QComboBox;
 
 class CHeaterRealTimeData : public QWidget
@@ -26,9 +27,25 @@ public:
 
     }realTimeDataTabWidgetPage;
 
+    const QString controlModeString[5] = {
+        tr("自动"),
+        tr("手动"),
+        tr("远程"),
+        tr("网络"),
+        tr("其它")
+    };
+    const QString runningStatusString[5] = {
+        tr("停止"),
+        tr("关闭"),
+        tr("加热"),
+        tr("吹风"),
+        tr("其它")
+    };
     typedef struct _heater_real_time_data_temp{
         int temperatureSensor[5];
-        int temperatureSensorBackup;
+        //int temperatureSensorBackup;
+        int controlMode[5];
+        int runningStatus[5];
     }SHeaterRealTimeDataTemp;
     typedef struct _heater_real_time_data_remote_control{
         int remoteControl[HEATER_QUANITY_NUM];
@@ -57,6 +74,11 @@ private slots:
 
 private:
     Ui::CHeaterRealTimeData *ui;
+
+    QLabel *pHeaterTemp[5];
+    QLabel *pControlMode[5];
+    QLabel *pRunningStatus[5];
+
     QComboBox *pWorkSwitchGroup[5];
     int m_groupSwith;
 };

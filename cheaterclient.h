@@ -41,8 +41,8 @@ public:
         ChildSessionForm_End
     };
     QString networkStatusString[3] = {
-        tr("连接"),
-        tr("断开"),
+        tr("联机"),
+        tr("离线"),
         tr("其它")
     };
     QString faultStatusString[3] = {
