@@ -27,7 +27,8 @@ class CHeaterClientServer : public QThread
     Q_OBJECT
 public:
     enum CLIENT_SERVER_COMMAND{
-        InfoPreviewReadCmd = 0,
+        ClientServerCmd_Start = 0,
+        InfoPreviewReadCmd,
         MainFormReadCmd,
         RealTimeDataTempReadCmd,
         RealTimeDataRemoteControlReadCmd,
@@ -67,9 +68,11 @@ protected:
     virtual void run();
 signals:
     void clientServerCommandComplete(int);
-private slots:
+public slots:
     void clientServerCommandExecute(int cmd);
 private:
+    QString m_ipAddr;
+
     QModbusMaster *pModbusMaster;
 
     SClientServerCommandHistory clientServerCommandHistory;

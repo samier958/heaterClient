@@ -7,6 +7,7 @@
 CHeaterClientServer::CHeaterClientServer(QString ipAddr, QObject *parent)
 {
     qDebug()<<ipAddr;
+    m_ipAddr = ipAddr;
     pModbusMaster = new QModbusMaster(ipAddr.toStdString().c_str(), MODBUS_TCP_PORT);
     pModbusMaster->setSlave(MODBUS_SLAVE_ADDR);
 
@@ -91,7 +92,7 @@ void CHeaterClientServer::run()
     uint controlFunctionSetting = 0;
 
     do{
-        qDebug()<<"Heater Connection Allowed:"<<pHeaterInfoPreview->allowed;
+        qDebug()<<m_ipAddr<<"Heater Connection Allowed:"<<pHeaterInfoPreview->allowed;
         if(!(pHeaterInfoPreview->allowed)){
             pHeaterInfoPreview->networkStatus = NETWORK_OFFLINE;
             pHeaterInfoPreview->averageTemperature = 0;
@@ -102,8 +103,9 @@ void CHeaterClientServer::run()
         }
         //child form
         cmd = clientServerCommandHistory.currentCommand;
-        qDebug()<<"Client Server Cmd:"<<cmd;
+        qDebug()<<m_ipAddr<<"Client Server Cmd:"<<cmd;
         pModbusMaster->connect();
+        qDebug()<<m_ipAddr<<"connect remote devcie.";
         switch (cmd) {
             case InfoPreviewReadCmd:
                     //info preview
@@ -161,12 +163,12 @@ void CHeaterClientServer::run()
                         remoteControlRegisters.setInteger16(0, pRealTimeDataRemoterControlSyncToRemoteDevices->remoteControl[i]);
                         pModbusMaster->writeRegisters(remoteControlRegisters);
                     }
-                    //clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
-                    //clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
+                    clientServerCommandHistory.currentCommand = InfoPreviewReadCmd;
+                    clientServerCommandHistory.lastCommand = InfoPreviewReadCmd;
                     //switch command execute
-                    serverCommand = clientServerCommandHistory.lastCommand;
-                    clientServerCommandHistory.lastCommand = clientServerCommandHistory.currentCommand;
-                    clientServerCommandHistory.currentCommand  = serverCommand;
+                    //serverCommand = clientServerCommandHistory.lastCommand;
+                    //clientServerCommandHistory.lastCommand = clientServerCommandHistory.currentCommand;
+                    //clientServerCommandHistory.currentCommand  = serverCommand;
                     break;
             case ParameterSettingReadCmd:
                     parameterSettingsRegisters.setAddress(HEATER_PARAMETER_SETTINGS_BASE + pHeaterParameterSettings->heaterIndex * HEATER_MODBUS_OFFSET_ADDR);
