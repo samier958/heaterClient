@@ -41,10 +41,13 @@ public:
 
 public slots:
 private slots:
+    void on_heaterGroupSwith_currentIndexChanged(int index);
+
 private:
     Ui::CHeaterFaultInfo *ui;
 
     QLabel *pFaultInfoLabel[5];
+    int m_groupSwith;
 };
 
 #endif // CHEATERFAULTINFO_H

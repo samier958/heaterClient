@@ -501,8 +501,8 @@
     <rect>
      <x>40</x>
      <y>20</y>
-     <width>321</width>
-     <height>23</height>
+     <width>501</width>
+     <height>41</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_12">
@@ -521,6 +521,33 @@
     </item>
     <item>
      <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QComboBox" name="heaterGroupSwith">
+      <item>
+       <property name="text">
+        <string>机舱</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>塔底</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -566,6 +593,19 @@
        </property>
       </item>
      </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>

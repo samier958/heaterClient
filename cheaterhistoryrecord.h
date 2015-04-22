@@ -123,7 +123,7 @@ public:
     SHeaterHistoryRecordFixedTime heaterHistoryRecordFixedTime[FAN_TOWER_GROUP];
     SHeaterHistoryRecordWorkOrFault heaterHistoryRecordWorkOrFault[FAN_TOWER_GROUP];
 signals:
-    void sendClientServerCommand(int);
+    void sendClientServerCommand(int, int);
 public slots:
 
 private slots:
@@ -137,8 +137,11 @@ private slots:
 
     void on_clearFaultRecord_released();
 
+    void on_heaterGroupSwith_currentIndexChanged(int index);
+
 private:
     Ui::CHeaterHistoryRecord *ui;
+    int m_groupSwith;
 
     QPixmap *pGreenCirclePixmap;
     QPixmap *pRedCirclePixmap;

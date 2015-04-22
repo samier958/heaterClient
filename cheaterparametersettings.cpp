@@ -13,8 +13,10 @@ CHeaterParameterSettings::CHeaterParameterSettings(QWidget *parent) :
 {
     ui->setupUi(this);
     m_groupSwith = 0;
-    memset(&(heaterParameterSetting[0]), 0, sizeof(heaterParameterSetting[0]));
-    memset(&(parameterSettingSyncToRemoteDevices[0]), 0, sizeof(parameterSettingSyncToRemoteDevices[0]));
+    for(int i = 0; i < FAN_TOWER_GROUP; i ++){
+        memset(&(heaterParameterSetting[i]), 0, sizeof(heaterParameterSetting[i]));
+        memset(&(parameterSettingSyncToRemoteDevices[i]), 0, sizeof(parameterSettingSyncToRemoteDevices[i]));
+    }
     heaterParameterSetting[0].heaterIndex = 0;
     heaterParameterSetting[1].heaterIndex = 0;
     showHeaterParameterSettings();
@@ -69,7 +71,7 @@ void CHeaterParameterSettings::on_heaterSwitch_currentIndexChanged(int index)
     ui->minimumDowntime->clear();
     ui->PT100TempSensorOffset->clear();
     heaterParameterSetting[m_groupSwith].heaterIndex = index;
-    emit sendClientServerCommand(CHeaterClientServer::ParameterSettingReadCmd);
+    emit sendClientServerCommand(m_groupSwith, CHeaterClientServer::ParameterSettingReadCmd);
 }
 
 void CHeaterParameterSettings::on_apply_released()
@@ -145,7 +147,7 @@ void CHeaterParameterSettings::on_apply_released()
     value = static_cast<int>(tmp);
     parameterSettingSyncToRemoteDevices[m_groupSwith].PT100TempSensorOffset = value;
 
-    emit sendClientServerCommand(CHeaterClientServer::ParameterSettingWriteCmd);
+    emit sendClientServerCommand(m_groupSwith, CHeaterClientServer::ParameterSettingWriteCmd);
 }
 
 void CHeaterParameterSettings::on_cancle_pressed()
@@ -156,5 +158,25 @@ void CHeaterParameterSettings::on_cancle_pressed()
 
 void CHeaterParameterSettings::on_reset_pressed()
 {
-    emit sendClientServerCommand(CHeaterClientServer::ParameterSettingResetCmd);
+    emit sendClientServerCommand(m_groupSwith, CHeaterClientServer::ParameterSettingResetCmd);
+}
+
+void CHeaterParameterSettings::on_heaterGroupSwith_currentIndexChanged(int index)
+{
+    ui->autoHeating->setChecked(false);
+    ui->autoHeatingStartTemp->clear();
+    ui->autoHeatingStopTemp->clear();
+    ui->autoRadiating->setChecked(false);
+    ui->autoRadiatingStartTemp->clear();
+    ui->autoRadiatingStopTemp->clear();
+    ui->debugTerminateTimer->clear();
+    ui->PTCDelayStart->clear();
+    ui->FANDelayStop->clear();
+    ui->startInterval->clear();
+    ui->minimumDowntime->clear();
+    ui->PT100TempSensorOffset->clear();
+
+    m_groupSwith = index;
+
+    showHeaterParameterSettings();
 }

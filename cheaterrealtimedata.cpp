@@ -12,9 +12,11 @@ CHeaterRealTimeData::CHeaterRealTimeData(QWidget *parent) :
 {
     ui->setupUi(this);
     m_groupSwith = 0;
-    memset(&(heaterRealTimeDataTemp[0]), 0, sizeof(heaterRealTimeDataTemp[0]));
-    memset(&(heaterRealTimeDataRemoterControl[0]), 0, sizeof(heaterRealTimeDataRemoterControl[0]));
-    memset(&(realTimeDataRemoterControlSyncToRemoteDevices[0]), 0, sizeof(realTimeDataRemoterControlSyncToRemoteDevices[0]));
+    for(int i = 0; i < FAN_TOWER_GROUP; i ++){
+        memset(&(heaterRealTimeDataTemp[i]), 0, sizeof(heaterRealTimeDataTemp[i]));
+        memset(&(heaterRealTimeDataRemoterControl[i]), 0, sizeof(heaterRealTimeDataRemoterControl[i]));
+        memset(&(realTimeDataRemoterControlSyncToRemoteDevices[i]), 0, sizeof(realTimeDataRemoterControlSyncToRemoteDevices[i]));
+    }
 
     pHeaterTemp[0] = ui->heaterTemp_1;
     pHeaterTemp[1] = ui->heaterTemp_2;
@@ -70,23 +72,24 @@ void CHeaterRealTimeData::showHeaterRealTimeDataTemp()
 void CHeaterRealTimeData::showHeaterRealTimeDataRemoteControl()
 {
     for(int i = 0; i <HEATER_QUANITY_NUM; i ++){
-        pWorkSwitchGroup[i]->setCurrentIndex(heaterRealTimeDataRemoterControl[0].remoteControl[i]);
+        pWorkSwitchGroup[i]->setCurrentIndex(heaterRealTimeDataRemoterControl[m_groupSwith].remoteControl[i]);
     }
 }
-/*
+
 void CHeaterRealTimeData::on_heaterGroupSwith_currentIndexChanged(int index)
 {
     qDebug()<<"index"<<index;
     m_groupSwith = index;
-    //showHeaterRealTimeData();
+    showHeaterRealTimeDataTemp();
+    showHeaterRealTimeDataRemoteControl();
 }
-*/
+
 void CHeaterRealTimeData::on_apply_released()
 {
     for(int i = 0; i <HEATER_QUANITY_NUM; i ++){
-        realTimeDataRemoterControlSyncToRemoteDevices[0].remoteControl[i] = pWorkSwitchGroup[i]->currentIndex();
+        realTimeDataRemoterControlSyncToRemoteDevices[m_groupSwith].remoteControl[i] = pWorkSwitchGroup[i]->currentIndex();
     }
-    emit sendClientServerCommand(CHeaterClientServer::RealTimeDataRemoteControlWriteCmd);
+    emit sendClientServerCommand(m_groupSwith, CHeaterClientServer::RealTimeDataRemoteControlWriteCmd);
 }
 
 void CHeaterRealTimeData::on_cancle_released()
@@ -100,10 +103,10 @@ void CHeaterRealTimeData::on_realTimeDataTabWidget_currentChanged(int index)
     qDebug()<<"Real-time data tab page:"<<index;
     switch (index) {
         case TemperatureTabPage:
-            emit sendClientServerCommand(CHeaterClientServer::RealTimeDataTempReadCmd);
+            emit sendClientServerCommand(m_groupSwith, CHeaterClientServer::RealTimeDataTempReadCmd);
             break;
         case RemoteControl:
-            emit sendClientServerCommand(CHeaterClientServer::RealTimeDataRemoteControlReadCmd);
+            emit sendClientServerCommand(m_groupSwith, CHeaterClientServer::RealTimeDataRemoteControlReadCmd);
             break;
         default:
             break;

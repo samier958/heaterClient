@@ -59,12 +59,12 @@ public:
     SHeaterRealTimeDataRemoteControl realTimeDataRemoterControlSyncToRemoteDevices[FAN_TOWER_GROUP];
 
 signals:
-    void sendClientServerCommand(int);
+    void sendClientServerCommand(int, int);
 public slots:
     void showHeaterRealTimeDataTemp();
     void showHeaterRealTimeDataRemoteControl();
 private slots:
-    //void on_heaterGroupSwith_currentIndexChanged(int index);
+    void on_heaterGroupSwith_currentIndexChanged(int index);
 
     void on_apply_released();
 

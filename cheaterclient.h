@@ -65,9 +65,10 @@ public:
     SHeaterInfoPreview heaterInfoPreview[FAN_TOWER_GROUP];
 
 signals:
-    void sendClientServerCommand(int);
+    void sendClientServerCommand(int, int);
 private slots:
     void functionSwitchButtonGroupStatusChanged(int id);
+    void clientServerCommand(int index, int cmd);
     void showHeaterClientCommandComplete(int cmd);
     void establishNetworkConnectionHub();
     void disconnectNetworkHub();
@@ -77,7 +78,7 @@ private:
     Ui::CHeaterClient *ui;
 
     QString m_clientConfigFile;
-    QString m_ipAddr;
+    QString m_ipAddr[FAN_TOWER_GROUP];
 
     CHeaterMainForm *pHeaterMainForm;
     CHeaterRealTimeData *pHeaterRealTimeData;

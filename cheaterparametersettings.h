@@ -44,7 +44,7 @@ public:
     SHeaterParameterSettings parameterSettingSyncToRemoteDevices[FAN_TOWER_GROUP];
 
 signals:
-    void sendClientServerCommand(int);
+    void sendClientServerCommand(int, int);
 public slots:
     void showHeaterParameterSettings();
 
@@ -56,6 +56,8 @@ private slots:
     void on_cancle_pressed();
 
     void on_reset_pressed();
+
+    void on_heaterGroupSwith_currentIndexChanged(int index);
 
 private:
     Ui::CHeaterParameterSettings *ui;
