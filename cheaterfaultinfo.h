@@ -18,16 +18,18 @@ class CHeaterFaultInfo : public QWidget
     Q_OBJECT
     
 public:
+
     const QString faultInfoString[8] = {
-        tr("PT100温度传感器连接故障"),
-        tr("温度检测异常警告"),
-        tr("风机断路器过载跳闸"),
-        tr("PTC断路器过载跳闸"),
-        tr("PTC表面温度超高警告"),
-        tr("启停温度设定错误"),
+        tr("温度传感器故障"),
+        tr("温度检测异常"),
+        tr("风机过载保护"),
+        tr("加热器断电"),
+        tr("加热器过热保护"),
+        tr("温控设定错误"),
         tr("设备正常"),
         tr("未知")
     };
+
     typedef struct _heater_fault_info{
         int faultInfo[5];
     }SHeaterFaultInfo;
@@ -39,6 +41,8 @@ public:
 
     SHeaterFaultInfo heaterFaultInfo[FAN_TOWER_GROUP];
 
+signals:
+    void sendClientServerCommand(int, int);
 public slots:
 private slots:
     void on_heaterGroupSwith_currentIndexChanged(int index);

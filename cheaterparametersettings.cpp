@@ -178,5 +178,6 @@ void CHeaterParameterSettings::on_heaterGroupSwith_currentIndexChanged(int index
 
     m_groupSwith = index;
 
-    showHeaterParameterSettings();
+    //showHeaterParameterSettings();
+    emit sendClientServerCommand(m_groupSwith, CHeaterClientServer::ParameterSettingReadCmd);
 }

@@ -194,5 +194,6 @@ void CHeaterHistoryRecord::on_clearFaultRecord_released()
 void CHeaterHistoryRecord::on_heaterGroupSwith_currentIndexChanged(int index)
 {
     m_groupSwith = index;
-    showHeaterHistoryRecordWorkOrFault();
+    //showHeaterHistoryRecordWorkOrFault();
+    emit sendClientServerCommand(m_groupSwith, CHeaterClientServer::HistoryRecordWorkOrFaultCmd);
 }

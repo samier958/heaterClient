@@ -65,7 +65,7 @@
        <rect>
         <x>20</x>
         <y>80</y>
-        <width>148</width>
+        <width>161</width>
         <height>91</height>
        </rect>
       </property>
@@ -125,6 +125,9 @@
        </item>
       </layout>
      </widget>
+     <zorder>autoHeating</zorder>
+     <zorder>layoutWidget</zorder>
+     <zorder>tabWidget_2</zorder>
     </widget>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
@@ -534,6 +537,12 @@
     </item>
     <item>
      <widget class="QComboBox" name="heaterGroupSwith">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <item>
        <property name="text">
         <string>机舱</string>

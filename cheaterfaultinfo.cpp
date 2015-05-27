@@ -1,9 +1,12 @@
-#include "cheaterfaultinfo.h"
+ #include "cheaterfaultinfo.h"
 #include "ui_cheaterfaultinfo.h"
 
 
 #include "heaterConfig.h"
 #include "cheaterclient.h"
+#include "cheaterclientserver.h"
+
+#include <QDebug>
 
 CHeaterFaultInfo::CHeaterFaultInfo(QWidget *parent) :
     QWidget(parent),
@@ -16,11 +19,11 @@ CHeaterFaultInfo::CHeaterFaultInfo(QWidget *parent) :
         memset(&(heaterFaultInfo[i]), 0, sizeof(heaterFaultInfo[i]));
     }
 
-    pFaultInfoLabel[0] = ui->faultInfo_1;
-    pFaultInfoLabel[1] = ui->faultInfo_2;
-    pFaultInfoLabel[2] = ui->faultInfo_3;
-    pFaultInfoLabel[3] = ui->faultInfo_4;
-    pFaultInfoLabel[4] = ui->faultInfo_5;
+    pFaultInfoLabel[0] = ui->faultInfo_0;
+    pFaultInfoLabel[1] = ui->faultInfo_1;
+    pFaultInfoLabel[2] = ui->faultInfo_2;
+    pFaultInfoLabel[3] = ui->faultInfo_3;
+    pFaultInfoLabel[4] = ui->faultInfo_4;
 }
 
 CHeaterFaultInfo::~CHeaterFaultInfo()
@@ -30,16 +33,20 @@ CHeaterFaultInfo::~CHeaterFaultInfo()
 
 void CHeaterFaultInfo::showHeaterFaultInfo()
 {
+    QString info[5];
     for(int i = 0; i < 5; i ++){
+        info[i].clear();
+        if(!(heaterFaultInfo[m_groupSwith].faultInfo[i])){info[i] = faultInfoString[6];continue;}
         for(int j = 0; j < 7; j ++){
-            if(!(heaterFaultInfo[m_groupSwith].faultInfo[i])){pFaultInfoLabel[i]->setText(faultInfoString[6]);break;}
-            if((heaterFaultInfo[m_groupSwith].faultInfo[i]) & (1 << j)){pFaultInfoLabel[i]->setText(faultInfoString[j]);}
+            if((heaterFaultInfo[m_groupSwith].faultInfo[i]) & (1 << j)){info[i] += faultInfoString[j] + "  ";}
         }
+        pFaultInfoLabel[i]->setText(info[i]);
     }
 }
 
 void CHeaterFaultInfo::on_heaterGroupSwith_currentIndexChanged(int index)
 {
     m_groupSwith = index;
-    showHeaterFaultInfo();
+    //showHeaterFaultInfo();
+    emit sendClientServerCommand(m_groupSwith, CHeaterClientServer::FaultInfoReadCmd);
 }

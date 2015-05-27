@@ -49,6 +49,7 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
 
     pHeaterFaultInfo = new CHeaterFaultInfo(this);
     pStackedWidget->insertWidget(FaultInfo, pHeaterFaultInfo);
+    connect(pHeaterFaultInfo, SIGNAL(sendClientServerCommand(int, int)), this, SIGNAL(sendClientServerCommand(int, int)));
 
     pHeaterHistoryRecord = new CHeaterHistoryRecord(this);
     pStackedWidget->insertWidget(HistoryRecord, pHeaterHistoryRecord);
@@ -81,6 +82,8 @@ CHeaterClient::CHeaterClient(QWidget *parent) :
     setWindowTitle("风电机舱加热远程控制系统    德阳智科电子");
 
     //emit sendClientServerCommand(0, CHeaterClientServer::SystimeTimeCalibrationCmd);
+    pHeaterClientServer[0]->clientServerCommandExecute(CHeaterClientServer::SystimeTimeCalibrationCmd);
+    pHeaterClientServer[1]->clientServerCommandExecute(CHeaterClientServer::SystimeTimeCalibrationCmd);
 }
 
 CHeaterClient::~CHeaterClient()
